@@ -24,6 +24,10 @@ app.use(express.json())
 The extended option determines how the URL-encoded data is parsed. When set to false, the data is parsed using the querystring*/
 app.use(express.urlencoded({ extended: false }))
 
+//*  ROUTES  
+// routes for registration, edit user and authorization
+app.use('/api/users', require('./routes/userRoutes'))
+
 /* Provides a basic error handling mechanism in Express that sends a JSON response with an error message and, optionally, the stack trace */
 app.use(errorHandler)
 
