@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { createRoot } from 'react-dom/client';
+import { StyledEngineProvider } from '@mui/material/styles';
 import App from './App';
 import './index.css';
 
@@ -13,7 +14,9 @@ Modal.setAppElement(container)
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <StyledEngineProvider injectFirst>
+        <App />
+      </StyledEngineProvider>
     </Provider>
   </React.StrictMode>
 );
