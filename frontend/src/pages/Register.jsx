@@ -1,8 +1,66 @@
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { register, reset } from '../features/auth/authSlice'
+//-MUI
 import { ThemeProvider, TextField, Button, Box, Typography, Container } from '@mui/material';
 import MainTheme from '../components/Theme'
 
 
 function Register() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  ///Data from redux store
+  const { user, isError, isSuccess, message } = useSelector((state) => state.auth)
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: ''
+  })
+
+  const { name, email, password, password2 } = formData
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
+    }
+
+    if (isSuccess || user) {
+      navigate('/profile')
+    }
+
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (password !== password2) {
+      toast.error('Password do not match')
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      }
+
+      // We send data from form to authSlice to register function and there to server by authService
+      dispatch(register(userData))
+    }
+  }
+
+
   return (
     <ThemeProvider theme={MainTheme}>
       <Container maxWidth="xs">
@@ -21,6 +79,7 @@ function Register() {
             component="form"
             noValidate
             autoComplete="off"
+            onSubmit={onSubmit}
             sx={{
               width: '100%',
               mt: 3,
@@ -31,36 +90,52 @@ function Register() {
           >
             <TextField
               label="Name"
+              name="name"
+              value={formData.name}
+              onChange={onChange}
               variant="outlined"
               color="primary"
               margin="normal"
               sx={{ width: '100%', maxWidth: 400 }}
+              required
             />
             <TextField
               label="Email"
               type="email"
+              name="email"
+              value={formData.email}
+              onChange={onChange}
               variant="outlined"
               color="primary"
               margin="normal"
               sx={{ width: '100%', maxWidth: 400 }}
+              required
             />
             <TextField
               label="Password"
               type="password"
+              name="password"
+              value={formData.password}
+              onChange={onChange}
               variant="outlined"
               color="primary"
               margin="normal"
               sx={{ width: '100%', maxWidth: 400 }}
+              required
             />
             <TextField
               label="Confirm password"
               type="password"
+              name="password2"
+              value={formData.password2}
+              onChange={onChange}
               variant="outlined"
               color="primary"
               margin="normal"
               sx={{ width: '100%', maxWidth: 400 }}
+              required
             />
-            <Button variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
+            <Button type="submit" variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
               Register
             </Button>
           </Box>

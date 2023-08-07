@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-// import { logout, reset } from '../features/auth/authSlice'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout, reset } from '../features/auth/authSlice'
 //-MUI
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -12,7 +12,7 @@ import MainTheme from './Theme'
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate()
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
 
   // Open/Close menu
@@ -24,11 +24,12 @@ function Header() {
     setAnchorEl(null);
   };
 
-  // const onLogout = () => {
-  //   dispatch(logout())
-  //   dispatch(reset())
-  //   navigate('/')
-  // }
+  const onLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    handleClose()
+    navigate('/')
+  }
 
   return (
     <ThemeProvider theme={MainTheme}>
@@ -85,7 +86,7 @@ function Header() {
                   onClose={handleClose}
                 >
                   <MenuItem onClick={handleClose} component={Link} to="/profile">Profile</MenuItem>
-                  <MenuItem onClick={handleClose} component={Link} to="/logout">Logout</MenuItem>
+                  <MenuItem onClick={onLogout}>Logout</MenuItem>
                 </Menu>
               </div>
             ) : (
