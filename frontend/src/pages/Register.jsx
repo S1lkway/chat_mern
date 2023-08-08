@@ -77,7 +77,6 @@ function Register() {
           </Typography>
           <Box
             component="form"
-            noValidate
             autoComplete="off"
             onSubmit={onSubmit}
             sx={{
@@ -122,6 +121,7 @@ function Register() {
               margin="normal"
               sx={{ width: '100%', maxWidth: 400 }}
               required
+              inputProps={{ minLength: 5 }}
             />
             <TextField
               label="Confirm password"
@@ -134,6 +134,7 @@ function Register() {
               margin="normal"
               sx={{ width: '100%', maxWidth: 400 }}
               required
+              inputProps={{ minLength: 5 }}
             />
             <Button type="submit" variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
               Register
