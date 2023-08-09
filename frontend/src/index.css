@@ -1,4 +1,14 @@
-body {
+/** BASIC TAGS                     */
+/** ****************************** */
+/** ****************************** */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+body {
+  height: 100vh;
+  /* It helps when change vertical size of browser */
+  overflow-y: hidden;
 }

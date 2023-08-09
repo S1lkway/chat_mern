@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { register, reset } from '../features/auth/authSlice'
 //-MUI
-import { ThemeProvider, TextField, Button, Box, Typography, Container } from '@mui/material';
-import MainTheme from '../components/Theme'
+import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
 
 function Register() {
@@ -30,7 +29,7 @@ function Register() {
     }
 
     if (isSuccess || user) {
-      navigate('/profile')
+      navigate('/chats')
     }
 
     dispatch(reset())
@@ -62,87 +61,85 @@ function Register() {
 
 
   return (
-    <ThemeProvider theme={MainTheme}>
-      <Container maxWidth="xs">
+    <Container maxWidth="xs">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          mt: 8,
+        }}
+      >
+        <Typography variant="h4" color="primary">
+          Registration
+        </Typography>
         <Box
+          component="form"
+          autoComplete="off"
+          onSubmit={onSubmit}
           sx={{
+            width: '100%',
+            mt: 3,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            mt: 8,
           }}
         >
-          <Typography variant="h4" color="primary">
-            Registration
-          </Typography>
-          <Box
-            component="form"
-            autoComplete="off"
-            onSubmit={onSubmit}
-            sx={{
-              width: '100%',
-              mt: 3,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <TextField
-              label="Name"
-              name="name"
-              value={formData.name}
-              onChange={onChange}
-              variant="outlined"
-              color="primary"
-              margin="normal"
-              sx={{ width: '100%', maxWidth: 400 }}
-              required
-            />
-            <TextField
-              label="Email"
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={onChange}
-              variant="outlined"
-              color="primary"
-              margin="normal"
-              sx={{ width: '100%', maxWidth: 400 }}
-              required
-            />
-            <TextField
-              label="Password"
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={onChange}
-              variant="outlined"
-              color="primary"
-              margin="normal"
-              sx={{ width: '100%', maxWidth: 400 }}
-              required
-              inputProps={{ minLength: 5 }}
-            />
-            <TextField
-              label="Confirm password"
-              type="password"
-              name="password2"
-              value={formData.password2}
-              onChange={onChange}
-              variant="outlined"
-              color="primary"
-              margin="normal"
-              sx={{ width: '100%', maxWidth: 400 }}
-              required
-              inputProps={{ minLength: 5 }}
-            />
-            <Button type="submit" variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
-              Register
-            </Button>
-          </Box>
+          <TextField
+            label="Name"
+            name="name"
+            value={formData.name}
+            onChange={onChange}
+            variant="outlined"
+            color="primary"
+            margin="normal"
+            sx={{ width: '100%', maxWidth: 400 }}
+            required
+          />
+          <TextField
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={onChange}
+            variant="outlined"
+            color="primary"
+            margin="normal"
+            sx={{ width: '100%', maxWidth: 400 }}
+            required
+          />
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={onChange}
+            variant="outlined"
+            color="primary"
+            margin="normal"
+            sx={{ width: '100%', maxWidth: 400 }}
+            required
+            inputProps={{ minLength: 5 }}
+          />
+          <TextField
+            label="Confirm password"
+            type="password"
+            name="password2"
+            value={formData.password2}
+            onChange={onChange}
+            variant="outlined"
+            color="primary"
+            margin="normal"
+            sx={{ width: '100%', maxWidth: 400 }}
+            required
+            inputProps={{ minLength: 5 }}
+          />
+          <Button type="submit" variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
+            Register
+          </Button>
         </Box>
-      </Container>
-    </ThemeProvider>
+      </Box>
+    </Container>
   )
 }
 
