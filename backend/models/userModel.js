@@ -22,7 +22,19 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Please add a password']
-    }
+    },
+    contacts: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
   },
   {
     timestamps: true,

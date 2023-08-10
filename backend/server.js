@@ -27,6 +27,8 @@ app.use(express.urlencoded({ extended: false }))
 //*  ROUTES  
 // routes for registration, edit user and authorization
 app.use('/api/users', require('./routes/userRoutes'))
+// routes to add and delete contacts
+app.use('api/contacts', require('./routes/contactRoutes'))
 
 /* Provides a basic error handling mechanism in Express that sends a JSON response with an error message and, optionally, the stack trace */
 app.use(errorHandler)

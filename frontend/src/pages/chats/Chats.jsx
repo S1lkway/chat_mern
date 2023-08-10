@@ -23,7 +23,6 @@ function Chats() {
       {/* LEFT PART */}
       <Box sx={{ flex: '0 0 35%', display: 'flex', flexDirection: 'column', position: 'relative', height: '93vh', p: 1.5 }}>
         <Box display="flex" justifyContent="center">
-
           <IconButton
             size="small"
             aria-label="main"
@@ -38,7 +37,7 @@ function Chats() {
             }}
           >
             <PersonAddIcon sx={{ mr: 1 }} />
-            <Typography variant='caption'>Add Contact</Typography>
+            <Typography variant='caption' sx={{ fontWeight: 600 }}>Add Contact</Typography>
           </IconButton>
 
           <IconButton
@@ -55,7 +54,7 @@ function Chats() {
             }}
           >
             <PeopleAltIcon sx={{ mr: 1 }} />
-            <Typography variant='caption'>Contacts list</Typography>
+            <Typography variant='caption' sx={{ fontWeight: 600 }}>Contact list</Typography>
           </IconButton>
         </Box>
 
