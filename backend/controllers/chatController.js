@@ -49,7 +49,15 @@ const createChat = asyncHandler(async (req, res) => {
 //* route POST /api/chats/:id
 //* access Private
 const deleteChat = asyncHandler(async (req, res) => {
-  res.status(200)
+  const chatToDelete = await Chat.findById(req.params.id)
+  if (chatToDelete) {
+    ///Delete chat data from MongoDB
+    await chatToDelete.deleteOne()
+    res.status(200).json({ id: req.params.id })
+  } else {
+    res.status(401)
+    throw new Error('Chat is not found')
+  }
 })
 
 
