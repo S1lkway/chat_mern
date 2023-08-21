@@ -8,7 +8,8 @@ const Chat = require('../models/chatModel')
 //* route GET /api/chats
 //* access Private
 const getChats = asyncHandler(async (req, res) => {
-  res.status(200)
+  const chats = await Chat.find({ users: req.user.id })
+  res.status(200).json(chats)
 })
 
 //* desc CREATE chat
