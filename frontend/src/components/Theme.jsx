@@ -3,10 +3,10 @@ import { createTheme } from '@mui/material';
 const MainTheme = createTheme({
   palette: {
     primary: {
-      main: '#333', // Серый цвет для основных элементов (например, кнопок)
+      main: '#333333', // Серый цвет для основных элементов (например, кнопок)
     },
     background: {
-      default: '#FFF', // Белый цвет для фона
+      default: '#FFFFFF', // Белый цвет для фона
     },
   },
 });

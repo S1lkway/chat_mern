@@ -1,20 +1,20 @@
 import { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
-import ContactList from './ContactList';
-import AddContact from './AddContact';
+import ChatList from './ChatList';
+import AddChat from './AddChat';
 import Messages from './Messages';
 //-MUI
 import { Box, IconButton, Typography } from '@mui/material';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AddCommentIcon from '@mui/icons-material/AddComment';
+import CommentIcon from '@mui/icons-material/Comment';
 
 function Chats() {
   // const navigate = useNavigate()
   // Contacts part content
-  const [contactsContent, setContactsContent] = useState('contactList')
+  const [chatsContent, setChatsContent] = useState('chatList')
 
-  const changeContactsContent = (content) => {
-    setContactsContent(content)
+  const changeChatsContent = (content) => {
+    setChatsContent(content)
   }
 
   return (
@@ -26,25 +26,24 @@ function Chats() {
           <IconButton
             size="small"
             aria-label="main"
-            color={contactsContent === 'contactList' ? "#333" : "inherit"}
-            onClick={() => changeContactsContent('addContact')}
+            color={chatsContent === 'chatList' ? "#333" : "inherit"}
+            onClick={() => changeChatsContent('addChat')}
             sx={{
               flex: 1,
               '&:hover': {
                 color: 'inherit',
-                backgroundColor: 'transparent',
               },
             }}
           >
-            <PersonAddIcon sx={{ mr: 1 }} />
-            <Typography variant='caption' sx={{ fontWeight: 600 }}>Add Contact</Typography>
+            <AddCommentIcon sx={{ mr: 1 }} />
+            <Typography variant='caption' sx={{ fontWeight: 600 }}>New chat</Typography>
           </IconButton>
 
           <IconButton
             size="small"
             aria-label="main"
-            color={contactsContent === 'contactList' ? "inherit" : "#333"}
-            onClick={() => changeContactsContent('contactList')}
+            color={chatsContent === 'chatList' ? "inherit" : "#333"}
+            onClick={() => changeChatsContent('chatList')}
             sx={{
               flex: 1,
               '&:hover': {
@@ -53,13 +52,13 @@ function Chats() {
               },
             }}
           >
-            <PeopleAltIcon sx={{ mr: 1 }} />
-            <Typography variant='caption' sx={{ fontWeight: 600 }}>Contact list</Typography>
+            <CommentIcon sx={{ mr: 1 }} />
+            <Typography variant='caption' sx={{ fontWeight: 600 }}>Chat list</Typography>
           </IconButton>
         </Box>
 
         {/* Contants content */}
-        {contactsContent === 'contactList' ? <ContactList /> : <AddContact />}
+        {chatsContent === 'chatList' ? <ChatList /> : <AddChat />}
       </Box>
 
       {/* RIGHT PART */}

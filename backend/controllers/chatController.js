@@ -8,7 +8,11 @@ const Chat = require('../models/chatModel')
 //* route GET /api/chats
 //* access Private
 const getChats = asyncHandler(async (req, res) => {
-  const chats = await Chat.find({ users: req.user.id })
+  const chats = await Chat.find({ users: req.user.id }).populate({
+    path: 'users',
+    select: '_id name email',
+    match: { _id: { $ne: req.user.id } } // Исключение текущего пользователя
+  });
   res.status(200).json(chats)
 })
 

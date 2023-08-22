@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
+import { getChats } from '../features/chats/chatsSlice'
 //- MUI
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
@@ -26,6 +27,7 @@ function Login() {
     }
 
     if (isSuccess || user) {
+      dispatch(getChats())
       navigate('/chats')
     }
 

@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
+import { resetChats } from '../features/chats/chatsSlice'
 //-MUI
 import ForumIcon from '@mui/icons-material/Forum';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, ThemeProvider, Typography } from '@mui/material';
-import MainTheme from './Theme'
+import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 
 
 function Header() {
@@ -27,99 +27,98 @@ function Header() {
 
   const onLogout = () => {
     dispatch(logout())
+    dispatch(resetChats())
     dispatch(reset())
     handleClose()
     navigate('/')
   }
 
   return (
-    <ThemeProvider theme={MainTheme}>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
-          {user ? (
-            <Box sx={{ display: 'flex' }}>
-              <Toolbar sx={{ justifyContent: 'space-between', width: '35%', borderRight: '1px solid white' }}>
-                <Box>
-                  <IconButton
-                    size="small"
-                    aria-label="main"
-                    color="inherit"
-                    onClick={() => navigate('/chats')}
-                  >
-                    <ForumIcon sx={{ fontSize: 28, mr: 1 }} /> Chat
-                  </IconButton>
-                </Box>
-
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        {user ? (
+          <Box sx={{ display: 'flex' }}>
+            <Toolbar sx={{ justifyContent: 'space-between', width: '35%', borderRight: '1px solid white' }}>
+              <Box>
                 <IconButton
                   size="small"
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
+                  aria-label="main"
                   color="inherit"
+                  onClick={() => navigate('/chats')}
                 >
-                  <AccountCircle />
+                  <ForumIcon sx={{ fontSize: 28, mr: 1 }} /> Chat
                 </IconButton>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                >
-                  <MenuItem onClick={handleClose} component={Link} to="/profile">Profile</MenuItem>
-                  <MenuItem onClick={onLogout}>Logout</MenuItem>
-                </Menu>
+              </Box>
 
-              </Toolbar>
-              <Toolbar>
-                <Typography variant='overline'>
-                  Pick contact to chat
-                </Typography>
-              </Toolbar>
-            </Box>
-          ) : (
-            <Toolbar sx={{ justifyContent: 'space-between' }}>
               <IconButton
-                size="Medium"
-                aria-label="main"
+                size="small"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
                 color="inherit"
-                onClick={() => navigate('/')}
               >
-                LiveChat
+                <AccountCircle />
               </IconButton>
-              <div>
-                {/* Login and Register buttons */}
-                <IconButton
-                  size="small"
-                  aria-label="login"
-                  color="inherit"
-                  onClick={() => navigate('/login')}
-                >
-                  Login
-                </IconButton>
-                <IconButton
-                  size="small"
-                  aria-label="register"
-                  color="inherit"
-                  onClick={() => navigate('/register')}
-                >
-                  Register
-                </IconButton>
-              </div>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose} component={Link} to="/profile">Profile</MenuItem>
+                <MenuItem onClick={onLogout}>Logout</MenuItem>
+              </Menu>
+
             </Toolbar>
-          )}
-        </AppBar>
-      </Box >
-    </ThemeProvider >
+            <Toolbar>
+              <Typography variant='overline'>
+                Pick contact to chat
+              </Typography>
+            </Toolbar>
+          </Box>
+        ) : (
+          <Toolbar sx={{ justifyContent: 'space-between' }}>
+            <IconButton
+              size="Medium"
+              aria-label="main"
+              color="inherit"
+              onClick={() => navigate('/')}
+            >
+              LiveChat
+            </IconButton>
+            <div>
+              {/* Login and Register buttons */}
+              <IconButton
+                size="small"
+                aria-label="login"
+                color="inherit"
+                onClick={() => navigate('/login')}
+              >
+                Login
+              </IconButton>
+              <IconButton
+                size="small"
+                aria-label="register"
+                color="inherit"
+                onClick={() => navigate('/register')}
+              >
+                Register
+              </IconButton>
+            </div>
+          </Toolbar>
+        )}
+      </AppBar>
+    </Box >
   );
 }
 
