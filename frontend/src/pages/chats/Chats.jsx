@@ -1,68 +1,94 @@
-import { useState } from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import ChatList from './ChatList';
 import AddChat from './AddChat';
-import Messages from './Messages';
+import ChatMessages from './ChatMessages';
+import { getChats } from '../../features/chats/chatsSlice'
 //-MUI
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import AddCommentIcon from '@mui/icons-material/AddComment';
 import CommentIcon from '@mui/icons-material/Comment';
 
 function Chats() {
+  const dispatch = useDispatch()
   // const navigate = useNavigate()
   // Contacts part content
   const [chatsContent, setChatsContent] = useState('chatList')
+  const [openChat, setOpenChat] = useState({})
+  // console.log(openChat)
 
   const changeChatsContent = (content) => {
     setChatsContent(content)
   }
 
+  useEffect(() => {
+    dispatch(getChats())
+  }, [dispatch])
+
   return (
 
     <Box sx={{ display: 'flex', }}>
       {/* LEFT PART */}
-      <Box sx={{ flex: '0 0 35%', display: 'flex', flexDirection: 'column', position: 'relative', height: '93vh', p: 1.5 }}>
+      <Box sx={{ flex: '0 0 35%', display: 'flex', flexDirection: 'column', position: 'relative', height: '93vh', pt: 2, backgroundColor: 'grey' }}>
         <Box display="flex" justifyContent="center">
-          <IconButton
+          <Button
             size="small"
-            aria-label="main"
-            color={chatsContent === 'chatList' ? "#333" : "inherit"}
+            variant="contained"
+            color={chatsContent === 'chatList' ? 'inherit' : 'primary'} // Используйте color='primary'
             onClick={() => changeChatsContent('addChat')}
             sx={{
+              m: 0.5,
               flex: 1,
-              '&:hover': {
-                color: 'inherit',
-              },
+              textTransform: 'none',
             }}
           >
-            <AddCommentIcon sx={{ mr: 1 }} />
+            <AddCommentIcon sx={{ mr: 0.5 }} />
             <Typography variant='caption' sx={{ fontWeight: 600 }}>New chat</Typography>
-          </IconButton>
+          </Button>
 
-          <IconButton
+          <Button
             size="small"
-            aria-label="main"
-            color={chatsContent === 'chatList' ? "inherit" : "#333"}
+            variant="contained"
+            color={chatsContent === 'chatList' ? 'primary' : 'inherit'} // Используйте color='primary'
             onClick={() => changeChatsContent('chatList')}
             sx={{
+              m: 0.5,
               flex: 1,
-              '&:hover': {
-                color: 'inherit',
-                backgroundColor: 'transparent',
-              },
+              textTransform: 'none',
             }}
           >
-            <CommentIcon sx={{ mr: 1 }} />
+            <CommentIcon sx={{ mr: 0.5 }} />
             <Typography variant='caption' sx={{ fontWeight: 600 }}>Chat list</Typography>
-          </IconButton>
+          </Button>
         </Box>
 
         {/* Contants content */}
-        {chatsContent === 'chatList' ? <ChatList /> : <AddChat />}
+        {chatsContent === 'chatList' ? <ChatList setOpenChat={setOpenChat} /> : <AddChat />}
       </Box>
 
       {/* RIGHT PART */}
-      <Messages />
+      {Object.keys(openChat).length === 0 ? (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center', // Выравнивание по вертикали
+            justifyContent: 'center', // Выравнивание по горизонтали
+            flexGrow: 1, // Растянуть на всю доступную ширину
+            // height: '93vh',
+          }}
+        >
+          {Object.keys(openChat).length === 0 ? (
+            <Typography variant='h5' sx={{ fontWeight: 600, color: '#787878' }}>
+              You didn't pick any chat
+            </Typography>
+          ) : (
+            <ChatMessages openChat={openChat} />
+          )}
+        </Box>
+      ) : (
+        <ChatMessages openChat={openChat} />
+      )}
+
     </Box>
   )
 }

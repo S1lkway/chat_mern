@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
-import { getChats } from '../features/chats/chatsSlice'
 //- MUI
 import { TextField, Button, Box, Typography, Container } from '@mui/material';
 
@@ -25,12 +24,9 @@ function Login() {
     if (isError) {
       toast.error(message)
     }
-
     if (isSuccess || user) {
-      dispatch(getChats())
       navigate('/chats')
     }
-
     /// Message after redirect if user is not authorized
     const prevUrl = location.state?.prevUrl
     if (prevUrl) {
@@ -38,7 +34,6 @@ function Login() {
       const { prevUrl, ...state } = location.state;
       navigate({ pathname: '/login', state });
     }
-
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch, location])
 

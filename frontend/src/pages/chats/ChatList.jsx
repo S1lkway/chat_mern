@@ -1,16 +1,20 @@
+// import { useState } from 'react';
 import { useSelector } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 //- MUI
 import { Box, Button, TextField, Typography } from '@mui/material';
 
-function ChatList() {
+function ChatList(params) {
+  const setOpenChat = params.setOpenChat
   // const navigate = useNavigate()
   // const dispatch = useDispatch()
   //*CONSTANTS FOR DATA
   const { chats } = useSelector((state) => state.chats)
+  // const { chatData, setChatData } = useState({})
 
-  const startChat = (chatId) => {
-    console.log(chatId)
+  const startChat = (chatIndex) => {
+    setOpenChat(chats[chatIndex])
+    console.log(chats[chatIndex])
   }
 
   return (
@@ -19,13 +23,12 @@ function ChatList() {
         component="form"
         noValidate
         autoComplete="off"
-        fullWidth
         // onSubmit={onSubmit}
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          mt: 1
+          p: 1,
         }}
       >
         <TextField
@@ -39,22 +42,20 @@ function ChatList() {
           // margin="normal"
           // value={email}
           // onChange={onChange}
-          sx={{ mt: 1, width: '100%' }}
+          sx={{ mt: 1, width: '100%', borderRadius: 1, backgroundColor: 'white' }}
         />
       </Box>
-      <Box
-        sx={{ mt: 1 }}
-      >
+      <Box>
         {chats.length > 0 ? (
-          chats.map((chat) => (
+          chats.map((chat, index) => (
             <Button
               key={chat._id}
               id={chat._id}
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => startChat(chat._id)}
-              sx={{ mt: 1 }}
+              onClick={() => startChat(index)}
+              sx={{ mt: 1, borderRadius: 0 }}
             >
               <Box
                 sx={{
@@ -65,8 +66,9 @@ function ChatList() {
                 }}
               >
                 <Typography
+                  // variant="body1"
                   title={`${chat.users[0].name}:  ${chat.users[0].email}`}
-                  sx={{ textAlign: 'left', width: '100%' }}
+                  sx={{ textAlign: 'left', width: '100%', fontWeight: 600 }}
                 >
                   {chat.users[0].name}
                 </Typography>
@@ -84,12 +86,18 @@ function ChatList() {
             </Button>
           ))
         ) : (
-          <Typography
-            variant='span'
-            sx={{ textAlign: 'center', mt: 1, color: '#787878' }}
-          >
-            You don't have chats
-          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+            <Typography
+              variant='span'
+              sx={{ textAlign: 'center', color: '#787878' }}
+            >
+              You don't have chats
+            </Typography>
+          </Box>
         )}
       </Box >
 

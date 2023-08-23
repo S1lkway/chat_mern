@@ -14,7 +14,8 @@ function AddChat() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          mt: 1
+          p: 1,
+
         }}
       >
         <TextField
@@ -28,7 +29,7 @@ function AddChat() {
           // margin="normal"
           // value={email}
           // onChange={onChange}
-          sx={{ width: '100%', mt: 1 }}
+          sx={{ mt: 1, width: '100%', backgroundColor: 'white', borderRadius: 1 }}
         />
       </Box>
     </>
