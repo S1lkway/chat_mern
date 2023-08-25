@@ -8,13 +8,17 @@ const Message = require('../models/messageModel')
 //* access Private
 const getMessages = asyncHandler(async (req, res) => {
   /// CONSTS
-  const chat = req.body.id
+  const chatData = await Chat.findById(req.params.id).populate({
+    path: 'users',
+    select: '_id name email',
+    match: { _id: { $ne: req.user.id } } // Исключение текущего пользователя
+  });
   /// ACTIONS
-  const messages = await Message.find({ chat: chat }).populate({
+  const messages = await Message.find({ chat: chatData._id }).populate({
     path: 'user',
     select: '_id name email',
   });
-  res.status(200).json(messages)
+  res.status(200).json({ chatData: chatData, messages: messages })
 })
 
 //* desc ADD message

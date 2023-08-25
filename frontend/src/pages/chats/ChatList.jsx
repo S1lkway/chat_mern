@@ -1,20 +1,20 @@
 // import { useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
+import { getMessages } from '../../features/messages/messagesSlice';
 //- MUI
 import { Box, Button, TextField, Typography } from '@mui/material';
 
-function ChatList(params) {
-  const setOpenChat = params.setOpenChat
+
+function ChatList() {
   // const navigate = useNavigate()
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   //*CONSTANTS FOR DATA
   const { chats } = useSelector((state) => state.chats)
   // const { chatData, setChatData } = useState({})
 
-  const startChat = (chatIndex) => {
-    setOpenChat(chats[chatIndex])
-    console.log(chats[chatIndex])
+  const startChat = (chatId) => {
+    dispatch(getMessages(chatId))
   }
 
   return (
@@ -54,7 +54,7 @@ function ChatList(params) {
               variant="contained"
               color="primary"
               fullWidth
-              onClick={() => startChat(index)}
+              onClick={() => startChat(chat._id)}
               sx={{ mt: 1, borderRadius: 0 }}
             >
               <Box

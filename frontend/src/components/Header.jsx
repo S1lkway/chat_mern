@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
 import { resetChats } from '../features/chats/chatsSlice'
+import { resetMessages } from '../features/messages/messagesSlice'
 //-MUI
 import ForumIcon from '@mui/icons-material/Forum';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -14,6 +15,7 @@ function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+  const { messages } = useSelector((state) => state.messages)
   // const chatUser = false
 
   // Open/Close menu
@@ -28,6 +30,7 @@ function Header() {
   const onLogout = () => {
     dispatch(logout())
     dispatch(resetChats())
+    dispatch(resetMessages())
     dispatch(reset())
     handleClose()
     navigate('/')
@@ -80,11 +83,19 @@ function Header() {
               </Menu>
 
             </Toolbar>
-            <Toolbar>
-              <Typography variant='overline'>
-                Pick contact to chat
-              </Typography>
-            </Toolbar>
+            <Box sx={{ display: 'flex' }}>
+              <Toolbar>
+                {Object.keys(messages).length === 0 ? (
+                  <Typography variant='overline'>
+                    Pick contact to chat
+                  </Typography>
+                ) : (
+                  <Typography variant='h6'>
+                    {messages.chatData.users[0].name}
+                  </Typography>
+                )}
+              </Toolbar>
+            </Box>
           </Box>
         ) : (
           <Toolbar sx={{ justifyContent: 'space-between' }}>

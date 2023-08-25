@@ -7,7 +7,7 @@ const {
 } = require('../controllers/messageController')
 const { protect } = require('../middleware/authMiddleware')
 
-router.get('/', protect, getMessages)            // '/api/messages'
+router.get('/:id', protect, getMessages)            // '/api/messages/:id'
 router.post('/', protect, addMessage)            // '/api/messages'
 router.delete('/:id', protect, deleteMessage)    // '/api/messages/:id'
 

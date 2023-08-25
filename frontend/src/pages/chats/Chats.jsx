@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import ChatList from './ChatList';
 import AddChat from './AddChat';
-import ChatMessages from './ChatMessages';
+// import ChatMessages from './ChatMessages';
 import { getChats } from '../../features/chats/chatsSlice'
 //-MUI
 import { Box, Button, Typography } from '@mui/material';
@@ -14,8 +14,6 @@ function Chats() {
   // const navigate = useNavigate()
   // Contacts part content
   const [chatsContent, setChatsContent] = useState('chatList')
-  const [openChat, setOpenChat] = useState({})
-  // console.log(openChat)
 
   const changeChatsContent = (content) => {
     setChatsContent(content)
@@ -63,32 +61,22 @@ function Chats() {
         </Box>
 
         {/* Contants content */}
-        {chatsContent === 'chatList' ? <ChatList setOpenChat={setOpenChat} /> : <AddChat />}
+        {chatsContent === 'chatList' ? <ChatList /> : <AddChat />}
       </Box>
 
       {/* RIGHT PART */}
-      {Object.keys(openChat).length === 0 ? (
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center', // Выравнивание по вертикали
-            justifyContent: 'center', // Выравнивание по горизонтали
-            flexGrow: 1, // Растянуть на всю доступную ширину
-            // height: '93vh',
-          }}
-        >
-          {Object.keys(openChat).length === 0 ? (
-            <Typography variant='h5' sx={{ fontWeight: 600, color: '#787878' }}>
-              You didn't pick any chat
-            </Typography>
-          ) : (
-            <ChatMessages openChat={openChat} />
-          )}
-        </Box>
-      ) : (
-        <ChatMessages openChat={openChat} />
-      )}
-
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center', // vertical center
+          justifyContent: 'center',   // horizontal center
+          flexGrow: 1,                // full width
+        }}
+      >
+        <Typography variant='h5' sx={{ fontWeight: 600, color: '#787878' }}>
+          You didn't pick any chat
+        </Typography>
+      </Box>
     </Box>
   )
 }
