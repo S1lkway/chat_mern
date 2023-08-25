@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import ChatList from './ChatList';
 import AddChat from './AddChat';
-// import ChatMessages from './ChatMessages';
+import ChatMessages from './ChatMessages';
 import { getChats } from '../../features/chats/chatsSlice'
 //-MUI
 import { Box, Button, Typography } from '@mui/material';
@@ -14,6 +14,7 @@ function Chats() {
   // const navigate = useNavigate()
   // Contacts part content
   const [chatsContent, setChatsContent] = useState('chatList')
+  const { messages } = useSelector((state) => state.messages)
 
   const changeChatsContent = (content) => {
     setChatsContent(content)
@@ -65,18 +66,24 @@ function Chats() {
       </Box>
 
       {/* RIGHT PART */}
-      <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center', // vertical center
-          justifyContent: 'center',   // horizontal center
-          flexGrow: 1,                // full width
-        }}
-      >
-        <Typography variant='h5' sx={{ fontWeight: 600, color: '#787878' }}>
-          You didn't pick any chat
-        </Typography>
-      </Box>
+      {Object.keys(messages).length === 0 ?
+        (
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center', // vertical center
+              justifyContent: 'center',   // horizontal center
+              flexGrow: 1,                // full width
+            }}
+          >
+            <Typography variant='h5' sx={{ fontWeight: 600, color: '#787878' }}>
+              You didn't pick any chat
+            </Typography>
+          </Box>
+        ) : (
+          <ChatMessages />
+        )}
+
     </Box>
   )
 }

@@ -41,7 +41,7 @@ function Header() {
       <AppBar position="static">
         {user ? (
           <Box sx={{ display: 'flex' }}>
-            <Toolbar sx={{ justifyContent: 'space-between', width: '35%', borderRight: '1px solid white' }}>
+            <Toolbar sx={{ justifyContent: 'space-between', width: '35%' }}>
               <Box>
                 <IconButton
                   size="small"
@@ -83,8 +83,8 @@ function Header() {
               </Menu>
 
             </Toolbar>
-            <Box sx={{ display: 'flex' }}>
-              <Toolbar>
+            <Box sx={{ display: 'flex', borderLeft: '1px solid white' }}>
+              <Toolbar sx={{}}>
                 {Object.keys(messages).length === 0 ? (
                   <Typography variant='overline'>
                     Pick contact to chat
