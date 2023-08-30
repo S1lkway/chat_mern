@@ -29,6 +29,25 @@ export const getMessages = createAsyncThunk(
   }
 )
 
+//* ADD MESSAGE
+export const addMessage = createAsyncThunk(
+  'messages/add',
+  async (newMessageData, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await messagesService.addMessage(newMessageData, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
 
 
 export const messagesSlice = createSlice({
@@ -39,7 +58,7 @@ export const messagesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      /// getChats
+      /// Get Chats
       .addCase(getMessages.pending, (state) => {
         state.isLoading = true
       })
@@ -49,6 +68,20 @@ export const messagesSlice = createSlice({
         state.messages = action.payload
       })
       .addCase(getMessages.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      /// Add Message
+      .addCase(addMessage.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addMessage.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.messages.messages.push(action.payload)
+      })
+      .addCase(addMessage.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

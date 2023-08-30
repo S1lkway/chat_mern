@@ -45,6 +45,10 @@ const addMessage = asyncHandler(async (req, res) => {
     chat: req.body.id,    // Chat id
     text: req.body.text,  // Chat text
   })
+  await message.populate({
+    path: 'user',
+    select: '_id name email',
+  })
   res.status(200).json(message)
 })
 

@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { login, reset } from '../features/auth/authSlice'
 //- MUI
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import { TextField, Button, Box, Typography } from '@mui/material';
 
 
 function Login() {
@@ -58,59 +58,57 @@ function Login() {
 
 
   return (
-    <Container maxWidth="xs">
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        mt: 8,
+      }}
+    >
+      <Typography variant="h4" color="primary">
+        Login
+      </Typography>
       <Box
+        component="form"
+        noValidate
+        autoComplete="off"
+        onSubmit={onSubmit}
         sx={{
+          width: '100%',
+          mt: 3,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          mt: 8,
         }}
       >
-        <Typography variant="h4" color="primary">
+        <TextField
+          label="Email"
+          type="email"
+          name="email"
+          variant="outlined"
+          color="primary"
+          margin="normal"
+          value={email}
+          onChange={onChange}
+          sx={{ width: '100%', maxWidth: 400 }}
+        />
+        <TextField
+          label="Password"
+          type="password"
+          name="password"
+          variant="outlined"
+          color="primary"
+          margin="normal"
+          value={password}
+          onChange={onChange}
+          sx={{ width: '100%', maxWidth: 400 }}
+        />
+        <Button type="submit" variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
           Login
-        </Typography>
-        <Box
-          component="form"
-          noValidate
-          autoComplete="off"
-          onSubmit={onSubmit}
-          sx={{
-            width: '100%',
-            mt: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <TextField
-            label="Email"
-            type="email"
-            name="email"
-            variant="outlined"
-            color="primary"
-            margin="normal"
-            value={email}
-            onChange={onChange}
-            sx={{ width: '100%', maxWidth: 400 }}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            name="password"
-            variant="outlined"
-            color="primary"
-            margin="normal"
-            value={password}
-            onChange={onChange}
-            sx={{ width: '100%', maxWidth: 400 }}
-          />
-          <Button type="submit" variant="contained" color="primary" sx={{ width: '100%', mt: 2, maxWidth: 400 }}>
-            Login
-          </Button>
-        </Box>
+        </Button>
       </Box>
-    </Container>
+    </Box>
   )
 }
 

@@ -14,8 +14,18 @@ const getMessages = async (chatId, token) => {
 }
 
 //* ADD NEW MESSAGES
-const addMessage = async (messageData, token) => { }
-//* GET ALL MESSAGES
+const addMessage = async (newMessageData, token) => {
+  /// Make config
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  const response = await axios.post(API_URL, newMessageData, config)
+  return response.data
+}
+
+//* DELETE MESSAGE
 const deleteMessage = async (messageId, token) => { }
 
 

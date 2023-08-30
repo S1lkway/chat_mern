@@ -25,7 +25,6 @@ function Chats() {
   }, [dispatch])
 
   return (
-
     <Box sx={{ display: 'flex', }}>
       {/* LEFT PART */}
       <Box sx={{ flex: '0 0 35%', display: 'flex', flexDirection: 'column', position: 'relative', height: '93vh', pt: 2, backgroundColor: 'grey' }}>
@@ -83,7 +82,6 @@ function Chats() {
         ) : (
           <ChatMessages />
         )}
-
     </Box>
   )
 }
