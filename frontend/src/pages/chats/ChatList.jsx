@@ -45,7 +45,7 @@ function ChatList() {
           sx={{ mt: 1, width: '100%', borderRadius: 1, backgroundColor: 'white' }}
         />
       </Box>
-      <Box>
+      <Box sx={{ m: 0.5 }}>
         {chats.length > 0 ? (
           chats.map((chat, index) => (
             <Button
@@ -55,7 +55,7 @@ function ChatList() {
               color="primary"
               fullWidth
               onClick={() => startChat(chat._id)}
-              sx={{ mt: 1, borderRadius: 0 }}
+              sx={{ mt: 1, borderRadius: 1 }}
             >
               <Box
                 sx={{

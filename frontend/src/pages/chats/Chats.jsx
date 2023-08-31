@@ -73,6 +73,7 @@ function Chats() {
               alignItems: 'center', // vertical center
               justifyContent: 'center',   // horizontal center
               flexGrow: 1,                // full width
+              backgroundColor: '#e0e0e0'
             }}
           >
             <Typography variant='h5' sx={{ fontWeight: 600, color: '#787878' }}>

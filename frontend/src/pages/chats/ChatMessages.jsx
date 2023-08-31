@@ -54,8 +54,8 @@ function ChatMessages() {
         flexDirection: 'column',
         position: 'relative',
         borderLeft: '1px solid white',
-        borderRight: '1px solid #787878',
-        height: '93vh'
+        height: '93vh',
+        backgroundColor: '#e0e0e0'
       }}
     >
       <Box ref={messagesContainerRef} sx={{
@@ -92,7 +92,7 @@ function ChatMessages() {
               flexGrow: 1,                // full width
             }}
           >
-            <Typography variant='h5' sx={{ pt: 5, fontWeight: 600, color: '#787878' }}>
+            <Typography variant='h5' sx={{ pt: 51, fontWeight: 600, color: '#787878' }}>
               Write a message to start chat
             </Typography>
           </Box>
