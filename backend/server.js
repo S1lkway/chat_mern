@@ -37,3 +37,21 @@ app.use(errorHandler)
 
 app.listen(port, () => console.log(`Server started on port ${port}`.yellow.underline))
 
+
+//* WEBSOCKET IO
+//* We are making a new WebSocket server
+const io = require("socket.io")(server, {
+  //If connected user doesn't do anything 60 seconds he is disconnect
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:3000",
+    // credentials: true,
+  },
+});
+
+//* It's sockets(methods) of websocket connection
+io.on("connection", (socket) => {
+  //When someone connected we will see it on console
+  console.log(`Connected to ${socket}`);
+});
+
