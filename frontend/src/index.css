@@ -11,11 +11,16 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
 }
 
 a {
+  color: black;
   text-decoration: none;
+}
+
+a:hover {
+  color: #bcbcbc;
 }
 
 h1,
@@ -50,31 +55,31 @@ ul {
 /** ****************************** */
 /** ****************************** */
 .container {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   width: 100%;
   max-width: 1170px;
   min-width: 700px;
-  margin: 10px auto;
+  height: 100vh;
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 300px auto;
-  grid-template-rows: 86px auto;
-
+  grid-template-columns: 350px auto;
+  grid-template-rows: 86px 1fr;
 }
 
 .header {
-  background-color: cadetblue;
+  /* background-color: rgb(195, 195, 195); */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
   height: 86px;
-  /* border-bottom: 1px solid #e6e6e6; */
   position: sticky;
   top: 0;
+  border-bottom: 1px lightgrey solid;
 }
 
 .content {
-  background-color: cornflowerblue;
+  text-align: center;
 }
 
 /** HEADING                        */
@@ -83,9 +88,7 @@ ul {
 .heading {
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 50px;
-  padding: 0 20px;
-  text-align: center;
+  margin: 50px 0px;
 }
 
 .heading p {
@@ -117,6 +120,7 @@ ul {
   display: block;
   margin: 0 0 5px 3px;
 }
+
 
 /** BUTTON BTN                     */
 /** ****************************** */
@@ -157,12 +161,8 @@ ul {
 
 
 @media (max-width: 1200px) {
-  .container {
-    margin: 0;
-  }
-
   .form {
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
   }
 }

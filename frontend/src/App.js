@@ -33,14 +33,6 @@ function App() {
 
       <ToastContainer autoClose={1500} />
     </div>
-    // <div className='wrapper'>
-    //   <div className='content'>
-    //     sdfaf
-    //   </div>
-    //   <div className='footer'>
-    //     sadfsaf
-    //   </div>
-    // </div>
   );
 }
 

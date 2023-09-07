@@ -27,11 +27,6 @@ function Header() {
             </Link>
             <ul className='between'>
               <li>
-                <Link to='/articles'>
-                  <h4>Articles</h4>
-                </Link>
-              </li>
-              <li>
                 <Link to='/profile'>
                   <h4>Profile</h4>
                 </Link>
