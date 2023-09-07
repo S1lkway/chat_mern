@@ -1,44 +1,46 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header';
+import Header from './components/Header'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import PrivateRoutes from './utils/PrivateRoutes'
-import { Container, ThemeProvider } from '@mui/material';
-import MainTheme from './components/Theme';
 //-Users
-import Main from './pages/Main';
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Profile from './pages/Profile'
+import Main from './pages/user/Main'
+import Login from './pages/user/Login'
+import Register from './pages/user/Register'
+import Profile from './pages/user/Profile'
 //- Chats
-import Chats from './pages/chats/Chats';
+// import Chats from './pages/chats/Chats';
 
 
 function App() {
   return (
-    <>
+    <div className='container'>
       <Router>
-        <ThemeProvider theme={MainTheme}>
-          <Container maxWidth='xl' disableGutters={true}>
 
-            <Header />
+        <Header />
 
-            <Routes>
-              <Route path='/' element={<Main />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/register' element={<Register />} />
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
 
-              <Route element={<PrivateRoutes />}>
-                <Route path='/profile' element={<Profile />} />
-                <Route path='/chats' element={<Chats />} />
-              </Route>
-            </Routes>
-
-          </Container>
-        </ThemeProvider>
+          <Route element={<PrivateRoutes />}>
+            <Route path='/profile' element={<Profile />} />
+            {/* <Route path='/chats' element={<Chats />} /> */}
+          </Route>
+        </Routes>
       </Router>
+
       <ToastContainer autoClose={1500} />
-    </>
+    </div>
+    // <div className='wrapper'>
+    //   <div className='content'>
+    //     sdfaf
+    //   </div>
+    //   <div className='footer'>
+    //     sadfsaf
+    //   </div>
+    // </div>
   );
 }
 

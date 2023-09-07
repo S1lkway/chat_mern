@@ -35,7 +35,7 @@ app.use('/api/messages', require('./routes/messageRoutes'))
 /* Provides a basic error handling mechanism in Express that sends a JSON response with an error message and, optionally, the stack trace */
 app.use(errorHandler)
 
-app.listen(port, () => console.log(`Server started on port ${port}`.yellow.underline))
+const server = app.listen(port, () => console.log(`Server started on port ${port}`.yellow.underline))
 
 
 //* WEBSOCKET IO

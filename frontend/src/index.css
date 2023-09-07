@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
 /** BASIC TAGS                     */
 /** ****************************** */
 /** ****************************** */
@@ -8,7 +10,159 @@
 }
 
 body {
-  height: 100vh;
-  /* It helps when change vertical size of browser */
-  overflow-y: hidden;
+  font-family: 'Poppins', sans-serif;
+  background-color: antiquewhite;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+}
+
+ul {
+  list-style: none;
+}
+
+/** HELP DEFAULT CLASSES           */
+/** ****************************** */
+/** ****************************** */
+.grid_row {
+  grid-column-start: span 2;
+}
+
+.between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.between>* {
+  margin-left: 10px;
+}
+
+/** GRID AREAS                     */
+/** ****************************** */
+/** ****************************** */
+.container {
+  background-color: lightblue;
+  width: 100%;
+  max-width: 1170px;
+  min-width: 700px;
+  margin: 10px auto;
+  display: grid;
+  grid-template-columns: 300px auto;
+  grid-template-rows: 86px auto;
+
+}
+
+.header {
+  background-color: cadetblue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  height: 86px;
+  /* border-bottom: 1px solid #e6e6e6; */
+  position: sticky;
+  top: 0;
+}
+
+.content {
+  background-color: cornflowerblue;
+}
+
+/** HEADING                        */
+/** ****************************** */
+/** ****************************** */
+.heading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 50px;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.heading p {
+  color: #828282;
+}
+
+/** FORM                           */
+/** ****************************** */
+/** ****************************** */
+.form {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.form-group label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
+}
+
+/** BUTTON BTN                     */
+/** ****************************** */
+/** ****************************** */
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn svg {
+  margin-right: 8px;
+}
+
+.btn-reverse {
+  background: #fff;
+  color: #000;
+}
+
+.btn-block {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  transform: scale(0.98);
+}
+
+
+@media (max-width: 1200px) {
+  .container {
+    margin: 0;
+  }
+
+  .form {
+    width: 70%;
+    margin: 0 auto;
+  }
 }
