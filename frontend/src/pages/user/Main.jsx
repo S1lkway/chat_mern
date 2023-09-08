@@ -1,5 +1,3 @@
-
-
 function Main() {
   return (
     <div className="content grid_row">
