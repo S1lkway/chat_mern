@@ -4,8 +4,6 @@
 /** ****************************** */
 /** ****************************** */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -59,15 +57,16 @@ ul {
   width: 100%;
   max-width: 1170px;
   min-width: 700px;
-  height: 100vh;
+  height: 95vh;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 350px auto;
   grid-template-rows: 86px 1fr;
+  gap: 10px;
 }
 
 .header {
-  /* background-color: rgb(195, 195, 195); */
+  background-color: rgb(239, 239, 239);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,10 +74,10 @@ ul {
   height: 86px;
   position: sticky;
   top: 0;
-  border-bottom: 1px lightgrey solid;
 }
 
 .content {
+  background-color: rgb(239, 239, 239);
   text-align: center;
 }
 
@@ -161,6 +160,11 @@ ul {
 
 
 @media (max-width: 1200px) {
+  .body {
+    margin: 0;
+    padding: 0;
+  }
+
   .form {
     width: 60%;
     margin: 0 auto;

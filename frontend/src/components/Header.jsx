@@ -38,7 +38,9 @@ function Header() {
               </li>
             </ul >
           </div>
-          <div className="header"></div>
+          <div className="header">
+            <h4>Pick contact to chat</h4>
+          </div>
         </>
       ) : (
         <div className="header grid_row">
