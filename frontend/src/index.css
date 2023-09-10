@@ -8,8 +8,10 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
   font-family: 'Poppins', sans-serif;
-  /* background-color: antiquewhite; */
 }
 
 a {
@@ -49,20 +51,23 @@ ul {
   margin-left: 10px;
 }
 
+.mainPicture {
+  width: 100%;
+}
+
 /** GRID AREAS                     */
 /** ****************************** */
 /** ****************************** */
 .container {
-  /* background-color: lightblue; */
   width: 100%;
   max-width: 1170px;
   min-width: 700px;
-  height: 95vh;
+  height: 100%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 350px auto;
-  grid-template-rows: 86px 1fr;
-  gap: 10px;
+  grid-template-rows: 70px 1fr;
+  gap: 5px;
 }
 
 .header {
@@ -71,7 +76,7 @@ ul {
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
-  height: 86px;
+  height: 70px;
   position: sticky;
   top: 0;
 }
@@ -160,10 +165,6 @@ ul {
 
 
 @media (max-width: 1200px) {
-  .body {
-    margin: 0;
-    padding: 0;
-  }
 
   .form {
     width: 60%;

@@ -14,7 +14,7 @@ import Profile from './pages/user/Profile'
 
 function App() {
   return (
-    <div className='container'>
+    <>
       <Router>
 
         <Header />
@@ -32,7 +32,7 @@ function App() {
       </Router>
 
       <ToastContainer autoClose={1500} />
-    </div>
+    </>
   );
 }
 

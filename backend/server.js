@@ -24,6 +24,8 @@ app.use(express.json())
 The extended option determines how the URL-encoded data is parsed. When set to false, the data is parsed using the querystring*/
 app.use(express.urlencoded({ extended: false }))
 
+app.use('/images', express.static('frontend/src/images'));
+
 //*  ROUTES  
 // routes for registration, edit user and authorization
 app.use('/api/users', require('./routes/userRoutes'))

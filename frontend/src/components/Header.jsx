@@ -1,4 +1,3 @@
-// import { FaComments, FaBookOpen, FaSignInAlt, FaSignOutAlt, FaUserPlus, FaUserEdit, FaGlobe } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
@@ -28,18 +27,18 @@ function Header() {
             <ul className='between'>
               <li>
                 <Link to='/profile'>
-                  <h4>Profile</h4>
+                  <h4><i>Profile</i></h4>
                 </Link>
               </li>
               <li>
                 <button className='btn' onClick={onLogout}>
-                  Logout
+                  <i>Logout</i>
                 </button>
               </li>
             </ul >
           </div>
           <div className="header">
-            <h4>Pick contact to chat</h4>
+            <h4>Pick contact to start chat</h4>
           </div>
         </>
       ) : (
@@ -50,12 +49,12 @@ function Header() {
           <ul className='between'>
             <li>
               <Link to='/login'>
-                <h4>Login</h4>
+                <h4><i>Login</i></h4>
               </Link>
             </li>
             <li>
               <Link to='/register'>
-                <h4>Register</h4>
+                <h4><i>Register</i></h4>
               </Link>
             </li>
           </ul>
