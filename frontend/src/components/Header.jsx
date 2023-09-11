@@ -21,8 +21,8 @@ function Header() {
       {user ? (
         <>
           <div className="header">
-            <Link to='/'>
-              <h3>LiveChat</h3>
+            <Link to='/chats'>
+              <h3>Chats</h3>
             </Link>
             <ul className='between'>
               <li>

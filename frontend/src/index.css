@@ -66,9 +66,13 @@ ul {
   height: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 350px auto;
-  grid-template-rows: 70px 1fr;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: 70px auto auto 1fr 70px;
   gap: 5px;
+}
+
+.container>* {
+  border-radius: 10px;
 }
 
 .header {
@@ -80,13 +84,56 @@ ul {
   height: 70px;
   position: sticky;
   top: 0;
-  border-radius: 10px;
 }
 
 .content {
+  grid-row-start: 2;
+  grid-row-end: 6;
   background: linear-gradient(to bottom right, rgb(244, 244, 244), rgb(239, 239, 239));
   text-align: center;
-  border-radius: 10px;
+}
+
+/** SIDEBAR                        */
+/** ****************************** */
+/** ****************************** */
+.sidebar_buttons {
+  grid-column: 1;
+  grid-row: 2;
+  background-color: darkkhaki;
+}
+
+.search_bar {
+  grid-column: 1;
+  grid-row: 3;
+  background-color: chartreuse;
+}
+
+.user_cards {
+  background-color: bisque;
+  /* grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 6; */
+  grid-area: 4 / 1 / 6 / 2;
+  /* height: 100%; */
+  overflow-y: auto;
+}
+
+/** MESSAGES                       */
+/** ****************************** */
+/** ****************************** */
+
+.messages_area {
+  grid-area: 2 / 2 / 5 / 3;
+  background-color: rgb(255, 180, 218);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.add_message_bar {
+  grid-column: 2;
+  grid-row: 5;
+  background-color: darkcyan;
 }
 
 /** HEADING                        */
@@ -168,7 +215,6 @@ ul {
 
 
 @media (max-width: 1200px) {
-
   .form {
     width: 60%;
     margin: 0 auto;

@@ -10,6 +10,7 @@ import Register from './pages/user/Register'
 import Profile from './pages/user/Profile'
 //- Chats
 // import Chats from './pages/chats/Chats';
+import Chats from './pages/chat/Chats'
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
           <Route element={<PrivateRoutes />}>
             <Route path='/profile' element={<Profile />} />
-            {/* <Route path='/chats' element={<Chats />} /> */}
+            <Route path='/chats' element={<Chats />} />
           </Route>
         </Routes>
       </Router>
