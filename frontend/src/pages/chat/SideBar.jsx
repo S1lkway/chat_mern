@@ -1,19 +1,13 @@
-import UserCard from "./components/UserCard"
+import UserCards from "./components/UserCards"
 import SearchBar from "./components/SearchBar"
 import SideBarButtons from "./components/SideBarButtons"
 
 function SideBar() {
   return (
     <>
-      <div className="sidebar_buttons">
-        <SideBarButtons />
-      </div>
-      <div className="search_bar">
-        <SearchBar />
-      </div>
-      <div className="user_cards">
-        <UserCard />
-      </div>
+      <SideBarButtons />
+      <SearchBar />
+      <UserCards />
     </>
   )
 }

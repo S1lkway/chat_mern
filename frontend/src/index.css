@@ -18,10 +18,10 @@ body {
 a {
   color: black;
   text-decoration: none;
-}
 
-a:hover {
-  color: #bcbcbc;
+  :hover {
+    color: #bcbcbc;
+  }
 }
 
 h1,
@@ -46,10 +46,10 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
 
-.between>* {
-  margin-left: 10px;
+  >* {
+    margin-left: 10px;
+  }
 }
 
 .mainPicture {
@@ -61,18 +61,19 @@ ul {
 /** ****************************** */
 .container {
   width: 100%;
-  max-width: 1170px;
+  max-width: 1400px;
   min-width: 700px;
   height: 100%;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 2fr 5fr;
   grid-template-rows: 70px auto auto 1fr 70px;
   gap: 5px;
-}
+  padding: 0 5px 0 5px;
 
-.container>* {
-  border-radius: 10px;
+  >* {
+    border-radius: 10px;
+  }
 }
 
 .header {
@@ -97,15 +98,21 @@ ul {
 /** ****************************** */
 /** ****************************** */
 .sidebar_buttons {
+  /* background-color: darkkhaki; */
   grid-column: 1;
   grid-row: 2;
-  background-color: darkkhaki;
+  padding: 20px 10px 10px 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .search_bar {
+  /* background-color: chartreuse; */
   grid-column: 1;
   grid-row: 3;
-  background-color: chartreuse;
+  padding: 10px 10px 0 10px;
+
 }
 
 .user_cards {
@@ -115,9 +122,43 @@ ul {
   grid-row-start: 4;
   grid-row-end: 6; */
   grid-area: 4 / 1 / 6 / 2;
-  /* height: 100%; */
+  padding: 10px;
   overflow-y: auto;
 }
+
+.card {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f0f0f0;
+  /* padding: 10px; */
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.user-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.delete-button {
+  display: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.card:hover {
+  background-color: #828282;
+  border-color: #828282;
+
+  .delete-button {
+    display: block;
+  }
+}
+
 
 /** MESSAGES                       */
 /** ****************************** */
@@ -143,10 +184,10 @@ ul {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 50px 0px;
-}
 
-.heading p {
-  color: #828282;
+  >p {
+    color: #828282;
+  }
 }
 
 /** FORM                           */
@@ -210,7 +251,7 @@ ul {
 }
 
 .btn:hover {
-  transform: scale(0.98);
+  transform: scale(0.99);
 }
 
 
