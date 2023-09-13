@@ -73,11 +73,11 @@ ul {
 
   >* {
     border-radius: 10px;
+    background: linear-gradient(to bottom right, rgb(244, 244, 244), rgb(239, 239, 239));
   }
 }
 
 .header {
-  background: linear-gradient(to bottom right, rgb(244, 244, 244), rgb(239, 239, 239));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -90,7 +90,6 @@ ul {
 .content {
   grid-row-start: 2;
   grid-row-end: 6;
-  background: linear-gradient(to bottom right, rgb(244, 244, 244), rgb(239, 239, 239));
   text-align: center;
 }
 
@@ -116,7 +115,7 @@ ul {
 }
 
 .user_cards {
-  background-color: bisque;
+  /* background-color: bisque; */
   /* grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 4;
@@ -131,10 +130,23 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f0f0f0;
-  /* padding: 10px; */
+  background: linear-gradient(to bottom right, #1e1e1e, #2e2e2e);
+  color: #fff;
+  padding: 5px 15px;
   border-radius: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.card:hover {
+  background: #3a3a3a;
+  transform: scale(0.99);
+
+  .delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .user-info {
@@ -142,23 +154,27 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
+  .card_name {
+    font-weight: 600;
+  }
+
+  .card_email {
+    font-size: 14px;
+    font-weight: 500;
+  }
 }
 
 .delete-button {
   display: none;
   font-size: 20px;
   cursor: pointer;
+  align-items: center;
 }
 
-.card:hover {
-  background-color: #828282;
-  border-color: #828282;
-
-  .delete-button {
-    display: block;
-  }
+.delete-button:hover {
+  transform: scale(1.2);
 }
-
 
 /** MESSAGES                       */
 /** ****************************** */
@@ -224,7 +240,7 @@ ul {
   padding: 10px 20px;
   border: 1px solid #000;
   border-radius: 5px;
-  background: #000;
+  background: linear-gradient(to bottom right, #1e1e1e, #2e2e2e);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -251,6 +267,8 @@ ul {
 }
 
 .btn:hover {
+  background: #3a3a3a;
+  border-color: #3a3a3a;
   transform: scale(0.99);
 }
 
