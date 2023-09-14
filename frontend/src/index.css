@@ -56,6 +56,71 @@ ul {
   width: 100%;
 }
 
+/** FORM                           */
+/** ****************************** */
+/** ****************************** */
+.form {
+  width: 40%;
+  margin: 0 auto;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-family: inherit;
+}
+
+.form-group label {
+  text-align: left;
+  display: block;
+  margin: 0 0 5px 3px;
+}
+
+/** BUTTON BTN                     */
+/** ****************************** */
+/** ****************************** */
+.btn {
+  padding: 10px 20px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: linear-gradient(to bottom right, #1e1e1e, #2e2e2e);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn svg {
+  margin-right: 8px;
+}
+
+.btn-reverse {
+  background: #fff;
+  color: #000;
+}
+
+.btn-block {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn:hover {
+  background: #3a3a3a;
+  border-color: #3a3a3a;
+  transform: scale(0.99);
+}
+
 /** GRID AREAS                     */
 /** ****************************** */
 /** ****************************** */
@@ -100,10 +165,14 @@ ul {
   /* background-color: darkkhaki; */
   grid-column: 1;
   grid-row: 2;
-  padding: 20px 10px 10px 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+
+  .btn {
+    width: 100%;
+    margin: 10px;
+  }
 }
 
 .search_bar {
@@ -116,10 +185,7 @@ ul {
 
 .user_cards {
   /* background-color: bisque; */
-  /* grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 6; */
+  /* r-start, c-start, r-end, c-end */
   grid-area: 4 / 1 / 6 / 2;
   padding: 10px;
   overflow-y: auto;
@@ -190,7 +256,35 @@ ul {
 .add_message_bar {
   grid-column: 2;
   grid-row: 5;
-  background-color: darkcyan;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  >form {
+    width: 100%;
+    display: flex;
+    /* Сделать форму flex-контейнером */
+    align-items: center;
+
+    .btn {
+      padding: 10px 15px;
+
+      >svg {
+        margin-right: 0;
+      }
+    }
+
+    .form-group {
+      flex-grow: 1;
+      /* Растянуть input на всю доступную ширину */
+      margin-right: 10px;
+
+      >input {
+        margin-bottom: 0;
+      }
+    }
+  }
 }
 
 /** HEADING                        */
@@ -206,71 +300,10 @@ ul {
   }
 }
 
-/** FORM                           */
-/** ****************************** */
-/** ****************************** */
-.form {
-  width: 40%;
-  margin: 0 auto;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-  width: 100%;
-  max-width: 100%;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  font-family: inherit;
-}
-
-.form-group label {
-  text-align: left;
-  display: block;
-  margin: 0 0 5px 3px;
-}
 
 
-/** BUTTON BTN                     */
-/** ****************************** */
-/** ****************************** */
-.btn {
-  padding: 10px 20px;
-  border: 1px solid #000;
-  border-radius: 5px;
-  background: linear-gradient(to bottom right, #1e1e1e, #2e2e2e);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  text-align: center;
-  appearance: button;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.btn svg {
-  margin-right: 8px;
-}
 
-.btn-reverse {
-  background: #fff;
-  color: #000;
-}
-
-.btn-block {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.btn:hover {
-  background: #3a3a3a;
-  border-color: #3a3a3a;
-  transform: scale(0.99);
-}
 
 
 @media (max-width: 1200px) {

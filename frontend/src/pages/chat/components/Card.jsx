@@ -3,11 +3,11 @@ import { FaDeleteLeft } from "react-icons/fa6";
 function Card() {
 
   const openChat = (id) => {
-    console.log(id)
+    console.log('Open chat')
   }
 
   const deleteChat = (id) => {
-    console.log(id)
+    console.log('Delete chat')
   }
   return (
     <div className="card" title="Open chat">
