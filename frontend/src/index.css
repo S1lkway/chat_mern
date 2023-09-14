@@ -52,6 +52,10 @@ ul {
   }
 }
 
+.flex_end {
+  justify-content: flex-end;
+}
+
 .mainPicture {
   width: 100%;
 }
@@ -162,7 +166,6 @@ ul {
 /** ****************************** */
 /** ****************************** */
 .sidebar_buttons {
-  /* background-color: darkkhaki; */
   grid-column: 1;
   grid-row: 2;
   display: flex;
@@ -176,7 +179,6 @@ ul {
 }
 
 .search_bar {
-  /* background-color: chartreuse; */
   grid-column: 1;
   grid-row: 3;
   padding: 10px 10px 0 10px;
@@ -184,7 +186,6 @@ ul {
 }
 
 .user_cards {
-  /* background-color: bisque; */
   /* r-start, c-start, r-end, c-end */
   grid-area: 4 / 1 / 6 / 2;
   padding: 10px;
@@ -248,9 +249,26 @@ ul {
 
 .messages_area {
   grid-area: 2 / 2 / 5 / 3;
-  background-color: rgb(255, 180, 218);
   height: 100%;
   overflow-y: auto;
+  padding: 10px;
+
+  .message_box {
+    width: 100%;
+    display: flex;
+
+    .message {
+      background: linear-gradient(to bottom right, rgb(170, 255, 227), rgb(127, 232, 255));
+      margin-bottom: 15px;
+      padding: 15px;
+      max-width: 60%;
+      border-radius: 10px;
+
+      /* .message_text {
+        font-weight: 500;
+      } */
+    }
+  }
 }
 
 .add_message_bar {
@@ -264,7 +282,6 @@ ul {
   >form {
     width: 100%;
     display: flex;
-    /* Сделать форму flex-контейнером */
     align-items: center;
 
     .btn {
@@ -277,7 +294,6 @@ ul {
 
     .form-group {
       flex-grow: 1;
-      /* Растянуть input на всю доступную ширину */
       margin-right: 10px;
 
       >input {
@@ -299,9 +315,6 @@ ul {
     color: #828282;
   }
 }
-
-
-
 
 
 
