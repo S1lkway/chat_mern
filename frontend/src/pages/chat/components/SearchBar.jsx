@@ -1,6 +1,11 @@
 
 
-function SearchBar() {
+function SearchBar(props) {
+
+  const onChange = (e) => {
+    props.setsearchEmail(e.target.value)
+  }
+
   const onSubmit = (e) => {
     e.preventDefault()
   }
@@ -13,8 +18,8 @@ function SearchBar() {
             id="text"
             name='text'
             // value={email}
-            placeholder='Search'
-          // onChange={onChange}
+            placeholder='Search by email'
+            onChange={onChange}
           />
         </div>
 
