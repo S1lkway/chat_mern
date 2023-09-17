@@ -1,14 +1,11 @@
 import Card from "./Card"
 
-function UserCard() {
+function UserCard(props) {
   return (
     <div className="user_cards">
-      <Card />
-      <Card />
-      <Card />
-
-
-
+      {props.sideBarList?.map((chat, index) => (
+        <Card id={index} chat={chat} />
+      ))}
     </div>
   )
 }
