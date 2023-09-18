@@ -1,5 +1,6 @@
-import SideBar from "./SideBar"
-import Messages from './Messages'
+//- Components
+import SideBar from './Sidebar/SideBar'
+import Messages from './Messages/Messages'
 
 function Chats() {
   return (

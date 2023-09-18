@@ -1,4 +1,4 @@
-import AddMessageBar from "./components/AddMessageBar"
+import AddMessageBar from '../components/AddMessageBar'
 
 function Messages() {
   return (

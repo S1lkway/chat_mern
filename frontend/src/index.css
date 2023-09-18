@@ -193,6 +193,13 @@ ul {
   overflow-y: auto;
 }
 
+.chat_list {
+  grid-area: 3 / 1 / 6 / 2;
+  padding: 10px;
+  overflow-y: auto;
+  text-align: center;
+}
+
 .card {
   width: 100%;
   display: flex;
