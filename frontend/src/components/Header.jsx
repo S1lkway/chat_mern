@@ -10,10 +10,6 @@ function Header() {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
   const { messages } = useSelector((state) => state.messages)
-  if (messages.chatData) {
-    console.log(messages.messages)
-  }
-  console.log(messages.chatData)
 
   const onLogout = () => {
     dispatch(logout())
