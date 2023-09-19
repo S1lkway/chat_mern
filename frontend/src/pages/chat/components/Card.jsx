@@ -1,9 +1,15 @@
+import { useDispatch } from 'react-redux'
 import { FaDeleteLeft } from "react-icons/fa6";
+// - Redux
+import { getMessages } from '../../../features/messages/messagesSlice'
+
 
 function Card(props) {
+  const dispatch = useDispatch()
   const chatId = props.chatId
   const userData = props.userData
   const openChat = (id) => {
+    dispatch(getMessages(id))
     console.log('Open chat - ' + id)
   }
 

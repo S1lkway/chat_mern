@@ -18,7 +18,7 @@ const getMessages = asyncHandler(async (req, res) => {
     path: 'user',
     select: '_id name email',
   });
-  res.status(200).json({ chatData: chatData, messages: messages })
+  res.status(200).json({ chatData: chatData, chatMessages: messages })
 })
 
 //* desc ADD message

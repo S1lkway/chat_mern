@@ -1,16 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout, reset } from '../features/auth/authSlice'
+import { resetChats } from '../features/chats/chatsSlice'
+import { resetMessages } from '../features/messages/messagesSlice'
 
 
 function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
+  const { messages } = useSelector((state) => state.messages)
+  if (messages.chatData) {
+    console.log(messages.messages)
+  }
+  console.log(messages.chatData)
 
   const onLogout = () => {
     dispatch(logout())
     dispatch(reset())
+    dispatch(resetChats())
+    dispatch(resetMessages())
     navigate('/')
   }
 
@@ -38,7 +47,12 @@ function Header() {
             </ul >
           </div>
           <div className="header">
-            <h4>Pick contact to start chat</h4>
+            {messages.chatData ? (
+              <h4>{messages.chatData.users[0].name}</h4>
+            ) : (
+              <h4>Pick contact to start chat</h4>
+            )}
+
           </div>
         </>
       ) : (
