@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 //- Components
-import Card from "../components/Card"
+import Card from "./components/Card"
 //- Redux
 import { getChats, resetChats } from '../../../features/chats/chatsSlice'
 
@@ -33,7 +33,7 @@ function ChatList() {
         ))
       ) : (
         <div className="empty_chat_list heading">
-          <p>You doesn't have any chat</p>
+          <p>You don't have any chat</p>
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 //- Components
-import SideBarButtons from "../components/SideBarButtons"
+import SideBarButtons from "./components/SideBarButtons"
 import ChatList from './ChatList'
 import NewChat from './NewChat'
 //- Redux

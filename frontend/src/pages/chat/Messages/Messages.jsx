@@ -1,34 +1,30 @@
-import AddMessageBar from '../components/AddMessageBar'
+import { useSelector } from 'react-redux'
+
+import AddMessageBar from './components/AddMessageBar'
+import Message from './components/Message'
 
 function Messages() {
+  const { messages } = useSelector((state) => state.messages)
+  // console.log(messages)
+
+  // flex_end - class for messages on right side
   return (
     <>
       <div className="messages_area">
-        <div className="message_box">
-          <div className="message">
-            <span className="message_text">Modi, repudiandae soluta maiores facere ad molestias corrupti error</span>
+
+
+        {messages?.chatMessages?.length > 0 ? (
+          messages.chatMessages?.map((messageData, index) => (
+            <Message key={index} messageData={messageData} />
+          ))
+        ) : (
+          <div className="empty_chat_list heading">
+            <p>You don't have any messages</p>
           </div>
-        </div>
-        <div className="message_box flex_end">
-          <div className="message">
-            <span className="message_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum aspernatur voluptate voluptatum enim, sapiente magnam eaque ratione. Modi, repudiandae soluta maiores facere ad molestias corrupti error est officiis dolore ratione.</span>
-          </div>
-        </div>
-        <div className="message_box">
-          <div className="message">
-            <span className="message_text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span>
-          </div>
-        </div>
-        <div className="message_box">
-          <div className="message">
-            <span className="message_text">Modi, repudiandae soluta maiores facere ad molestias corrupti error est officiis dolore ratione.</span>
-          </div>
-        </div>
-        <div className="message_box flex_end">
-          <div className="message">
-            <span className="message_text">Lorem</span>
-          </div>
-        </div>
+        )}
+
+
+
       </div>
       <AddMessageBar />
     </>

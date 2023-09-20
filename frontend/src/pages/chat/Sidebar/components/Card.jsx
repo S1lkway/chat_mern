@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { FaDeleteLeft } from "react-icons/fa6";
 // - Redux
-import { getMessages } from '../../../features/messages/messagesSlice'
+import { getMessages } from '../../../../features/messages/messagesSlice'
 
 
 function Card(props) {

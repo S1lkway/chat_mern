@@ -68,9 +68,6 @@ function Header() {
               </Link>
             </li>
           </ul>
-
-
-
         </div>
       )}
     </>
