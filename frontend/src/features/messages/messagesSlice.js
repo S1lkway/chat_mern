@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import messagesService from './messagesService'
 
 const initialState = {
-  messages: {},
+  chat: null,
+  messages: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -65,7 +66,9 @@ export const messagesSlice = createSlice({
       .addCase(getMessages.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.messages = action.payload
+        const { chatData, chatMessages } = action.payload;
+        state.chat = chatData
+        state.messages = chatMessages
       })
       .addCase(getMessages.rejected, (state, action) => {
         state.isLoading = false

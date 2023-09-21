@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // - Components
 import AddMessageBar from './components/AddMessageBar'
@@ -8,21 +8,22 @@ import Message from './components/Message'
 
 function Messages() {
   // const dispatch = useDispatch()
-  const { messages } = useSelector((state) => state.messagesList)
-  // console.log(messages)
-  // useEffect(() => {
-  //   dispatch(getMessages())
-  //   console.log('aaa')
-  // }, [])
+  const { messages, chat } = useSelector((state) => state.messagesList)
+  // console.log(chat)
+  useEffect(() => {
+    if (chat != null) {
+      console.log(chat._id)
+    }
+  }, [chat])
 
 
   return (
     <>
       <div className="messages_area">
 
-        {messages?.chatMessages?.length > 0 ? (
-          messages.chatMessages?.map((messageData, index) => (
-            <Message key={index} messageData={messageData} />
+        {messages?.length > 0 ? (
+          messages?.map((message, index) => (
+            <Message key={index} messageData={message} />
           ))
         ) : (
 
