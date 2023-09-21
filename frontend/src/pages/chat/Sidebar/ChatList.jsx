@@ -11,7 +11,7 @@ function ChatList() {
   const navigate = useNavigate()
 
   const { user } = useSelector((state) => state.auth)
-  const { chats, isError, message } = useSelector((state) => state.chats)
+  const { chats, isError, message } = useSelector((state) => state.chatList)
 
   useEffect(() => {
     if (isError) {

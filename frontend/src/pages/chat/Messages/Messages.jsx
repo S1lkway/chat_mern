@@ -8,7 +8,7 @@ import Message from './components/Message'
 
 function Messages() {
   // const dispatch = useDispatch()
-  const { messages } = useSelector((state) => state.messages)
+  const { messages } = useSelector((state) => state.messagesList)
   // console.log(messages)
   // useEffect(() => {
   //   dispatch(getMessages())

@@ -9,7 +9,7 @@ function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const { messages } = useSelector((state) => state.messages)
+  const { messages } = useSelector((state) => state.messagesList)
 
   const onLogout = () => {
     dispatch(logout())

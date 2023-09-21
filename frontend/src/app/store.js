@@ -6,7 +6,7 @@ import messagesReducer from '../features/messages/messagesSlice'
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    chats: chatsReducer,
-    messages: messagesReducer,
+    chatList: chatsReducer,
+    messagesList: messagesReducer,
   },
 });

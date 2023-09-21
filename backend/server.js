@@ -54,6 +54,15 @@ const io = require("socket.io")(server, {
 //* It's sockets(methods) of websocket connection
 io.on("connection", (socket) => {
   //When someone connected we will see it on console
-  console.log(`Connected to ${socket}`);
+  console.log('A user connected');
+
+  socket.on("join chat", (chatData) => {
+    socket.join(chatData.chatId);
+    console.log(`User ${chatData.userId} Joined Chat: ` + chatData.chatId);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Пользователь отключился');
+  });
 });
 
