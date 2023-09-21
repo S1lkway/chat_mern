@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { FaDeleteLeft } from "react-icons/fa6";
+// - Redux
 import { logout, reset } from '../features/auth/authSlice'
 import { resetChats } from '../features/chats/chatsSlice'
 import { resetMessages } from '../features/messages/messagesSlice'
@@ -9,7 +11,11 @@ function Header() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const { messages } = useSelector((state) => state.messagesList)
+  const { chat } = useSelector((state) => state.messagesList)
+
+  const cancelChat = () => {
+    dispatch(resetMessages())
+  }
 
   const onLogout = () => {
     dispatch(logout())
@@ -42,14 +48,14 @@ function Header() {
               </li>
             </ul >
           </div>
-          <div className="header">
-            {messages.chatData ? (
-              <h4>{messages.chatData.users[0].name}</h4>
-            ) : (
-              <h4>Pick contact to start chat</h4>
-            )}
-
-          </div>
+          {chat != null ? (
+            <div className="header">
+              <h4><i>{chat.users[0].name}</i></h4>
+              <div className="cancel-button" title="Cancel chat" onClick={() => cancelChat()}><FaDeleteLeft /></div>
+            </div>
+          ) : (
+            null
+          )}
         </>
       ) : (
         <div className="header grid_row">

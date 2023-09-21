@@ -126,6 +126,19 @@ ul {
   transform: scale(0.99);
 }
 
+.cancel-button {
+  color: #3a3a3a;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.cancel-button:hover {
+  color: #000;
+  transform: scale(1.2);
+}
+
 /** GRID AREAS                     */
 /** ****************************** */
 /** ****************************** */
@@ -254,6 +267,18 @@ ul {
 /** MESSAGES                       */
 /** ****************************** */
 /** ****************************** */
+
+.area_without_chat {
+  grid-area: 1 / 2 / 6 / 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .heading {
+    margin: auto;
+  }
+}
 
 .messages_area {
   grid-area: 2 / 2 / 5 / 3;

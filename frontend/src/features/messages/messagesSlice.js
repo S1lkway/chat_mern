@@ -82,7 +82,7 @@ export const messagesSlice = createSlice({
       .addCase(addMessage.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.messages.messages.push(action.payload)
+        state.messages.push(action.payload)
       })
       .addCase(addMessage.rejected, (state, action) => {
         state.isLoading = false

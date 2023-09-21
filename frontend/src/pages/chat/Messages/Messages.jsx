@@ -19,22 +19,33 @@ function Messages() {
 
   return (
     <>
-      <div className="messages_area">
+      {(chat != null) ? (
+        <>
+          <div className="messages_area">
 
-        {messages?.length > 0 ? (
-          messages?.map((message, index) => (
-            <Message key={index} messageData={message} />
-          ))
-        ) : (
+            {messages?.length > 0 ? (
+              messages?.map((message, index) => (
+                <Message key={index} messageData={message} />
+              ))
+            ) : (
 
-          <div className="empty_messages_box heading">
-            <p>You don't have any messages</p>
+              <div className="empty_messages_box heading">
+                <p>Write first message to start chat</p>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <AddMessageBar />
-    </>
+          <AddMessageBar />
+        </>
+      ) : (
+        <div className='area_without_chat'>
+          <div className='heading'>
+            <p>Pick contact to start chat</p>
+          </div>
 
+
+        </div>
+      )}
+    </>
   )
 }
 
