@@ -10,11 +10,11 @@ function Card(props) {
   const userData = props.userData
   const openChat = (id) => {
     dispatch(getMessages(id))
-    console.log('Open chat - ' + id)
+    // console.log('Open chat - ' + id)
   }
 
   const deleteChat = (id) => {
-    console.log('Delete chat - ' + id)
+    // console.log('Delete chat - ' + id)
   }
   return (
     <div className="card" title="Open chat">
