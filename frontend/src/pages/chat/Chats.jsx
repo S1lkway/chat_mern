@@ -1,12 +1,24 @@
+import { useSelector } from 'react-redux'
 //- Components
 import SideBar from './Sidebar/SideBar'
 import Messages from './Messages/Messages'
+// - Redux
 
 function Chats() {
+  const { chat } = useSelector((state) => state.messagesList)
   return (
     <>
       <SideBar />
-      <Messages />
+
+      {chat?._id ? (
+        <Messages />
+      ) : (
+        <div className='area_without_chat'>
+          <div className='heading'>
+            <p>Pick contact to start chat</p>
+          </div>
+        </div>
+      )}
     </>
   )
 }

@@ -11,7 +11,7 @@ function ChatList() {
   const navigate = useNavigate()
 
   const { user } = useSelector((state) => state.auth)
-  const { chats, isError, message } = useSelector((state) => state.chatList)
+  const { chats, isLoading, isError, message } = useSelector((state) => state.chatList)
 
   useEffect(() => {
     if (isError) {
@@ -26,12 +26,15 @@ function ChatList() {
     }
   }, [user, navigate, isError, message, dispatch])
   return (
+
     <div className="chat_list">
       {chats?.length > 0 ? (
         chats?.map((chat) => (
           <Card key={chat._id} chatId={chat._id} userData={chat.users[0]} />
         ))
       ) : (
+
+        !isLoading &&
         <div className="empty_chat_list heading">
           <p>You don't have any chat</p>
         </div>
