@@ -1,27 +1,38 @@
-// import { useState } from "react";
+import { useState } from "react";
+import { useSelector, useDispatch } from 'react-redux'
 import { BsFillSendFill } from "react-icons/bs";
 // - Redux
-// import { addMessage } from '../../../../features/messages/messagesSlice'
+import { addMessage } from '../../../../features/messages/messagesSlice'
 
 function AddMessageBar() {
+  const dispatch = useDispatch()
+  const { chat } = useSelector((state) => state.messagesList)
+  const [formData, setFormData] = useState({
+    text: '',
+  })
 
-  // const [formData, setFormData] = useState({
-  //   text: '',
-  // })
+  const { text } = formData
+  // console.log(text)
 
-  // const { text } = formData
-
-  // const onChange = (e) => {
-  //   setFormData((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value,
-  //   }))
-  // }
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
 
+    const newMessageData = {
+      id: chat._id,
+      text: text
+    }
+
+    dispatch(addMessage(newMessageData))
+
     console.log('Send new message')
+    setFormData({ text: '' })
   }
   return (
     <div className="add_message_bar">
@@ -31,9 +42,9 @@ function AddMessageBar() {
             type="text"
             id="text"
             name='text'
-            // value={text}
+            value={text}
             placeholder='Send new message'
-          // onChange={onChange}
+            onChange={onChange}
           />
         </div>
         <button type='submit' className='btn'>

@@ -15,9 +15,7 @@ function Messages(props) {
   const { messages, chat } = useSelector((state) => state.messagesList)
 
   useEffect(() => {
-    console.log('mount')
     socket.emit('join chat', { userName: user.name, chatId: chat._id });
-
     return () => {
       socket.emit('leave chat', { userName: user.name, chatId: chat._id })
     }
