@@ -62,7 +62,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("leave chat", (chatData) => {
-    socket.join(chatData.chatId);
+    socket.leave(chatData.chatId);
     console.log(`User ${chatData.userName} Leaved Chat: ` + chatData.chatId);
   });
 

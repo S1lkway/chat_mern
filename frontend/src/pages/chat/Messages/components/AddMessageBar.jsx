@@ -1,6 +1,22 @@
+// import { useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
+// - Redux
+// import { addMessage } from '../../../../features/messages/messagesSlice'
 
 function AddMessageBar() {
+
+  // const [formData, setFormData] = useState({
+  //   text: '',
+  // })
+
+  // const { text } = formData
+
+  // const onChange = (e) => {
+  //   setFormData((prevState) => ({
+  //     ...prevState,
+  //     [e.target.name]: e.target.value,
+  //   }))
+  // }
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -15,7 +31,7 @@ function AddMessageBar() {
             type="text"
             id="text"
             name='text'
-            // value={email}
+            // value={text}
             placeholder='Send new message'
           // onChange={onChange}
           />

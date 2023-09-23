@@ -1,33 +1,28 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import io from 'socket.io-client';
 // - Components
 import AddMessageBar from './components/AddMessageBar'
 import Message from './components/Message'
-let socket;
 
 // import WebSocket from '../components/WebSocket'
 // - Redux
 // import { getMessages } from '../../../features/messages/messagesSlice'
 
-function Messages() {
+function Messages(props) {
+  const socket = props.socket
   // const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const { messages, chat, isLoading } = useSelector((state) => state.messagesList)
+  const { messages, chat } = useSelector((state) => state.messagesList)
 
   useEffect(() => {
-    if (!isLoading) {
-      socket = io('http://localhost:3000')
-      // let chatData = { userName: user.name, chatId: chat._id }
-      socket.emit('join chat', { userName: user.name, chatId: chat._id });
-    }
+    console.log('mount')
+    socket.emit('join chat', { userName: user.name, chatId: chat._id });
 
     return () => {
-      // let chatData = { userName: user.name, chatId: chat._id }
       socket.emit('leave chat', { userName: user.name, chatId: chat._id })
-      socket.disconnect()
     }
-  }, [chat, user, isLoading])
+    // eslint-disable-next-line
+  }, [chat])
 
 
   return (
