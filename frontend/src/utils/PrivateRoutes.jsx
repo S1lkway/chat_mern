@@ -1,8 +1,14 @@
-import { Outlet, Navigate, useLocation } from "react-router-dom"
-import { useSelector } from "react-redux";
+import { Outlet, Navigate, useLocation, useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
 import jwt_decode from "jwt-decode";
+// - Redux
+import { logout, reset } from '../features/auth/authSlice'
+import { resetChats } from '../features/chats/chatsSlice'
+import { resetMessages } from '../features/messages/messagesSlice'
 
 function PrivateRoutes() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const location = useLocation();
   const user = useSelector((state) => state.auth.user);
 
@@ -11,8 +17,11 @@ function PrivateRoutes() {
     const decodedToken = jwt_decode(token);
     const currentTime = Date.now() / 1000;
     if (decodedToken.exp < currentTime) {
-      const prevUrl = location.pathname;
-      return <Navigate to="/login" state={{ 'prevUrl': prevUrl }} />
+      dispatch(logout())
+      dispatch(reset())
+      dispatch(resetChats())
+      dispatch(resetMessages())
+      navigate('/')
     }
     return <Outlet />
   } else {
