@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 // - Components
 import AddMessageBar from './components/AddMessageBar'
@@ -13,6 +13,14 @@ function Messages(props) {
   // const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
   const { messages, chat } = useSelector((state) => state.messagesList)
+  const messagesContainerRef = useRef(null);
+
+  useEffect(() => {
+    //Scroll container dows when messages change
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
 
   useEffect(() => {
     socket.emit('join chat', { userName: user.name, chatId: chat._id });
@@ -25,7 +33,7 @@ function Messages(props) {
 
   return (
     <>
-      <div className="messages_area">
+      <div ref={messagesContainerRef} className="messages_area">
 
         {messages?.length > 0 ? (
           messages?.map((message, index) => (
@@ -33,7 +41,7 @@ function Messages(props) {
           ))
         ) : (
 
-          <div className="empty_messages_box heading">
+          <div className="heading">
             <p>Write first message to start chat</p>
           </div>
         )}
