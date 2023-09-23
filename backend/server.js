@@ -63,8 +63,12 @@ io.on("connection", (socket) => {
 
   socket.on("leave chat", (chatData) => {
     socket.leave(chatData.chatId);
-    console.log(`User ${chatData.userName} Leaved Chat: ` + chatData.chatId);
+    console.log(`${chatData.userName} Leaved Chat: ` + chatData.chatId);
   });
+
+  socket.on("new message", (messageData) => {
+    console.log(`Got new message from ${messageData.user.name} to Chat: ${messageData.chat}`)
+  })
 
   socket.on('disconnect', () => {
     console.log('User disconnected from socket.io');
