@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux'
 // - Components
 import AddMessageBar from './components/AddMessageBar'
 import Message from './components/Message'
-
-// import WebSocket from '../components/WebSocket'
 // - Redux
 // import { getMessages } from '../../../features/messages/messagesSlice'
 
@@ -12,7 +10,7 @@ function Messages(props) {
   const socket = props.socket
   // const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const { messages, chat } = useSelector((state) => state.messagesList)
+  const { messages, chat, isLoading } = useSelector((state) => state.messagesList)
   const messagesContainerRef = useRef(null);
   const [showMessages, setShowMessages] = useState([])
 
@@ -24,16 +22,22 @@ function Messages(props) {
   }, [showMessages]);
 
   useEffect(() => {
-    socket.emit('join chat', { userName: user.name, chatId: chat._id });
+    if (!isLoading) {
+      socket.emit('join chat', { userName: user.name, chatId: chat._id });
 
-    return () => {
-      socket.emit('leave chat', { userName: user.name, chatId: chat._id })
+      return () => {
+        socket.emit('leave chat', { userName: user.name, chatId: chat._id })
+      }
     }
+
     // eslint-disable-next-line
   }, [chat])
 
   useEffect(() => {
-    setShowMessages(messages)
+    if (!isLoading) {
+      setShowMessages(messages)
+    }
+    // eslint-disable-next-line
   }, [messages])
 
 
