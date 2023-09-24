@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useLocation, useNavigate } from "react-router-dom"
+import { Outlet, Navigate, useLocation } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
 import jwt_decode from "jwt-decode";
 // - Redux
@@ -8,9 +8,10 @@ import { resetMessages } from '../features/messages/messagesSlice'
 
 function PrivateRoutes() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const location = useLocation();
   const user = useSelector((state) => state.auth.user);
+  const prevUrl = location.pathname;
 
   if (user != null) {
     const token = user.token
@@ -21,12 +22,11 @@ function PrivateRoutes() {
       dispatch(reset())
       dispatch(resetChats())
       dispatch(resetMessages())
-      navigate('/')
+
+      return <Navigate to="/login" state={{ 'prevUrl': prevUrl }} />
     }
     return <Outlet />
   } else {
-
-    const prevUrl = location.pathname;
     return <Navigate to="/login" state={{ 'prevUrl': prevUrl }} />
   }
 
