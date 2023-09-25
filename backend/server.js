@@ -68,7 +68,8 @@ io.on("connection", (socket) => {
 
   socket.on("new message", (messageData) => {
     console.log(`Got new message from ${messageData.user.name} to Chat: ${messageData.chat}`)
-    socket.broadcast.to(messageData.chat).emit('new message', messageData);
+    // Message to everybody in chat include user who sent a message
+    io.to(messageData.chat).emit("new message", messageData);
   })
 
   socket.on('disconnect', () => {
