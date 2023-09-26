@@ -53,26 +53,24 @@ const io = require("socket.io")(server, {
 
 //* It's sockets(methods) of websocket connection
 io.on("connection", (socket) => {
-  //When someone connected we will see it on console
+  /// When someone connected we will see it on console
   console.log('A user connected to socket.io');
-
+  /// User joining a chat to get messages from other members of that chat live
   socket.on("join chat", (chatData) => {
     socket.join(chatData.chatId);
     console.log(`User ${chatData.userName} Joined Chat: ` + chatData.chatId);
   });
-
+  /// User leaving connected chat
   socket.on("leave chat", (chatData) => {
     socket.leave(chatData.chatId);
     console.log(`${chatData.userName} Leaved Chat: ` + chatData.chatId);
   });
-
+  /// Getting message from user in chat and send it to others members of this chat live
   socket.on("new message", (websocketMessageData) => {
-    console.log(`Got new message from ${websocketMessageData.user.name} to Chat: ${websocketMessageData.chat}`)
-    socket.broadcast.to(websocketMessageData.chat).emit('new message', websocketMessageData);
-    // Message to everybody in chat include user who sent a message
-    // io.to(websocketMessageData.chat).emit("new message", websocketMessageData);
+    // console.log(`Got new message from ${websocketMessageData.user.name} to Chat: ${websocketMessageData.chat}`)
+    socket.broadcast.to(websocketMessageData.chat).emit('websocket message', websocketMessageData);
   })
-
+  /// Disconnect from socket io
   socket.on('disconnect', () => {
     console.log('User disconnected from socket.io');
   });

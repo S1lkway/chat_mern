@@ -1,52 +1,53 @@
-import { useRef, useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useRef, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 // - Components
 import AddMessageBar from './components/AddMessageBar'
 import Message from './components/Message'
 // - Redux
-// import { getMessages } from '../../../features/messages/messagesSlice'
+import { websocketMessage } from '../../../features/messages/messagesSlice'
 
 function Messages(props) {
+  /// Consts
   const socket = props.socket
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
   const { messages, chat, isLoading } = useSelector((state) => state.messagesList)
   const messagesContainerRef = useRef(null);
-  const [showMessages, setShowMessages] = useState([])
 
+  /// Scroll container dows when messages change
   useEffect(() => {
-    //Scroll container dows when messages change
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
-  }, [showMessages]);
-
+  }, [messages]);
+  /// Join and leaving chatroom when chat is changes
   useEffect(() => {
     if (!isLoading) {
       socket.emit('join chat', { userName: user.name, chatId: chat._id });
-
       return () => {
         socket.emit('leave chat', { userName: user.name, chatId: chat._id })
       }
     }
-
     // eslint-disable-next-line
   }, [chat])
 
+  /// Put message from other members of chatroom in redux when get it from websocket
   useEffect(() => {
-    if (!isLoading) {
-      setShowMessages(messages)
-    }
-    // eslint-disable-next-line
-  }, [messages])
-
+    socket.on("websocket message", (websocketMessageData) => {
+      // console.log(websocketMessageData)
+      dispatch(websocketMessage(websocketMessageData))
+    })
+    return () => {
+      socket.off('websocket message');
+    };
+  })
 
   return (
     <>
       <div ref={messagesContainerRef} className="messages_area">
 
-        {showMessages?.length > 0 ? (
-          showMessages?.map((message, index) => (
+        {messages?.length > 0 ? (
+          messages?.map((message, index) => (
             <Message key={index} messageData={message} />
           ))
         ) : (

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 import { BsFillSendFill } from "react-icons/bs";
 // - Redux
 import { addMessage } from '../../../../features/messages/messagesSlice'
 
 function AddMessageBar(props) {
+
   /// CONSTANTS
   const dispatch = useDispatch()
   const socket = props.socket
@@ -20,7 +22,7 @@ function AddMessageBar(props) {
   useEffect(() => {
     if (sendMessage && !isLoading) {
       const lastMessage = messages[messages.length - 1]
-      console.log(lastMessage)
+      // console.log(lastMessage)
       socket.emit("new message", lastMessage)
       setSendMessage(false)
     }
@@ -39,16 +41,19 @@ function AddMessageBar(props) {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    const newMessageData = {
-      id: chat._id,
-      text: text
+    if (text === '') {
+      toast.error('Message is empty')
+    } else {
+      const newMessageData = {
+        id: chat._id,
+        text: text
+      }
+
+      dispatch(addMessage(newMessageData))
+      setSendMessage(true)
+
+      setFormData({ text: '' })
     }
-
-    dispatch(addMessage(newMessageData))
-    setSendMessage(true)
-
-    console.log('Send new message')
-    setFormData({ text: '' })
   }
 
 
