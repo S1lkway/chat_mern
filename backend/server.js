@@ -66,10 +66,11 @@ io.on("connection", (socket) => {
     console.log(`${chatData.userName} Leaved Chat: ` + chatData.chatId);
   });
 
-  socket.on("new message", (messageData) => {
-    console.log(`Got new message from ${messageData.user.name} to Chat: ${messageData.chat}`)
+  socket.on("new message", (websocketMessageData) => {
+    console.log(`Got new message from ${websocketMessageData.user.name} to Chat: ${websocketMessageData.chat}`)
+    socket.broadcast.to(websocketMessageData.chat).emit('new message', websocketMessageData);
     // Message to everybody in chat include user who sent a message
-    io.to(messageData.chat).emit("new message", messageData);
+    // io.to(websocketMessageData.chat).emit("new message", websocketMessageData);
   })
 
   socket.on('disconnect', () => {

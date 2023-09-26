@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import messagesService from './messagesService'
 
+
 const initialState = {
   chat: null,
   messages: [],
@@ -30,7 +31,7 @@ export const getMessages = createAsyncThunk(
   }
 )
 
-//* ADD MESSAGE
+//* ADD MESSAGE TO DATABASE
 export const addMessage = createAsyncThunk(
   'messages/add',
   async (newMessageData, thunkAPI) => {
@@ -49,6 +50,17 @@ export const addMessage = createAsyncThunk(
   }
 )
 
+//* GET WEBSOCKET MESSAGE
+export const websocketMessage = createAsyncThunk(
+  'messages/websocket',
+  async (websocketMessageData, thunkAPI) => {
+    try {
+      return websocketMessageData;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 
 export const messagesSlice = createSlice({
@@ -85,6 +97,20 @@ export const messagesSlice = createSlice({
         state.messages.push(action.payload)
       })
       .addCase(addMessage.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      /// Websocket Message
+      .addCase(websocketMessage.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(websocketMessage.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.messages.push(action.payload)
+      })
+      .addCase(websocketMessage.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
