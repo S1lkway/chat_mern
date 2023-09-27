@@ -59,7 +59,7 @@ function AddMessageBar(props) {
 
   return (
     <div className="add_message_bar">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="formInputWithButton">
         <div className="form-group">
           <input
             type="text"

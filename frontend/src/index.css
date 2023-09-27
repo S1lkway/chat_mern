@@ -86,6 +86,36 @@ ul {
   margin: 0 0 5px 3px;
 }
 
+.formInputWithButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  .btn {
+    padding: 10px 15px;
+
+    >svg {
+      margin-right: 0;
+    }
+  }
+
+  .btn:hover {
+    >svg {
+      transform: scale(1.15);
+    }
+  }
+
+  .form-group {
+    flex-grow: 1;
+    margin-right: 10px;
+
+    >input {
+      margin-bottom: 0;
+    }
+  }
+
+}
+
 /** BUTTON BTN                     */
 /** ****************************** */
 /** ****************************** */
@@ -195,8 +225,7 @@ ul {
 .search_bar {
   grid-column: 1;
   grid-row: 3;
-  padding: 10px 10px 0 10px;
-
+  padding: 10px;
 }
 
 .user_cards {
@@ -311,29 +340,6 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  >form {
-    width: 100%;
-    display: flex;
-    align-items: center;
-
-    .btn {
-      padding: 10px 15px;
-
-      >svg {
-        margin-right: 0;
-      }
-    }
-
-    .form-group {
-      flex-grow: 1;
-      margin-right: 10px;
-
-      >input {
-        margin-bottom: 0;
-      }
-    }
-  }
 }
 
 /** HEADING                        */
