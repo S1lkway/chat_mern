@@ -16,6 +16,57 @@ const getChats = asyncHandler(async (req, res) => {
   res.status(200).json(chats)
 })
 
+//* desc get NEW chats
+//* route POST /api/chats/newchats
+//* access Private
+const newChats = asyncHandler(async (req, res) => {
+  /// Consts
+  const searchEmail = req.body.email
+  // console.log(searchEmail)
+  const currentUserId = req.user._id;
+  // console.log(req.user)
+
+  /// Get a list of users who has chat with current user
+  const chatListUsers = await Chat.aggregate([
+    {
+      $match: {
+        users: currentUserId // Находим чаты, где участвует currentUserId
+      }
+    },
+    {
+      $unwind: '$users' // Разбиваем массив users на отдельные документы
+      // По сути если есть 2 чата с двумя пользователями в users в каждом, то в ответе вместо 2 массивов с подмассивом users придут 4 массива, где в users будет по одной строчке вместо подмассива
+    },
+    {
+      $match: {
+        users: { $ne: currentUserId } // Исключаем currentUserId из результатов
+        //Прошлая команда создала кучу массивов для каждого пользователя из users. Данной командой мы удаляем все массивы, в которых users = текущему пользователю
+      }
+    },
+    {
+      $group: {
+        _id: '$users' // Группируем по пользователям (по id)
+      }
+    },
+    {
+      $project: {
+        _id: 1// Проецируем только id пользователей
+      }
+    }
+  ]);
+  /// Get a list of users from DB current user doesn't have chats and email includes searchEmail
+  const newChatsData = await User.find({
+    $and: [
+      { email: { $regex: new RegExp(searchEmail, "i") } }, // "i" - игнорирование регистра
+      { _id: { $nin: [currentUserId, ...chatListUsers.map(user => user._id)] } } // Фильтр по id, исключая текущего пользователя и пользователей из chatListUsers
+    ]
+  });
+  // console.log(newChatsData)
+
+  res.status(200).json(newChatsData)
+})
+
+
 //* desc CREATE chat
 //* route POST /api/chats
 //* access Private
@@ -67,6 +118,7 @@ const deleteChat = asyncHandler(async (req, res) => {
 
 module.exports = {
   getChats,
+  newChats,
   createChat,
   deleteChat,
 }
