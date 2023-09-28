@@ -93,7 +93,7 @@ const createChat = asyncHandler(async (req, res) => {
     const chat = await Chat.create({
       users: [req.user.id, req.body.id]
     })
-    res.status(200).json(chat)
+    res.status(200).json(req.body.id)
   } else {
     res.status(401)
     throw new Error('Contact is not found')

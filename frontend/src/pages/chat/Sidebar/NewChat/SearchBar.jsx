@@ -25,7 +25,7 @@ function SearchBar() {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if (email.length < 2) {
+    if (email.length <= 2) {
       toast.error('Email needs to be more than 2 symbols')
     } else {
 
