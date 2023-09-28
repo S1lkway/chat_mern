@@ -1,8 +1,8 @@
 import { useState } from "react"
 //- Components
 import SideBarButtons from "./components/SideBarButtons"
-import ChatList from './ChatList'
-import NewChat from './NewChat'
+import ChatList from "./ChatList/ChatList"
+import NewChat from "./NewChat/NewChat"
 //- Redux
 
 function SideBar() {

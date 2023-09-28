@@ -13,9 +13,20 @@ const getChats = async (token) => {
   return response.data
 }
 
+//* GET NEW CHATS
+const newChats = async (searchEmail, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.post(API_URL + 'newchats', searchEmail, config)
+  return response.data
+}
+
 const chatsService = {
   getChats,
-
+  newChats
 }
 
 export default chatsService

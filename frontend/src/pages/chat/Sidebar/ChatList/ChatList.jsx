@@ -2,9 +2,9 @@ import { useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 //- Components
-import Card from "./components/Card"
+import Card from "./Card"
 //- Redux
-import { getChats, resetChats } from '../../../features/chats/chatsSlice'
+import { getChats, resetChats } from '../../../../features/chats/chatsSlice'
 
 function ChatList() {
   const dispatch = useDispatch()

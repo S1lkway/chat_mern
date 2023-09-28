@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { MdPersonSearch } from "react-icons/md";
+// - Redux
+import { newChats } from "../../../../features/chats/chatsSlice";
 
 function SearchBar(props) {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: '',
   })
@@ -25,7 +29,7 @@ function SearchBar(props) {
       toast.error('Email is empty')
     } else {
       console.log(email)
-
+      dispatch(newChats(email))
 
       setFormData({ email: '' })
     }
