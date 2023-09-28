@@ -5,7 +5,7 @@ import { MdPersonSearch } from "react-icons/md";
 // - Redux
 import { newChats } from "../../../../features/chats/chatsSlice";
 
-function SearchBar(props) {
+function SearchBar() {
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     email: '',
@@ -25,13 +25,12 @@ function SearchBar(props) {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if (email === '') {
-      toast.error('Email is empty')
+    if (email.length < 2) {
+      toast.error('Email needs to be more than 2 symbols')
     } else {
-      console.log(email)
-      dispatch(newChats(email))
 
-      setFormData({ email: '' })
+      dispatch(newChats(formData))
+      // setFormData({ email: '' })
     }
   }
   return (

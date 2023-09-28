@@ -233,6 +233,7 @@ ul {
   grid-area: 4 / 1 / 6 / 2;
   padding: 10px;
   overflow-y: auto;
+  text-align: center;
 }
 
 .chat_list {

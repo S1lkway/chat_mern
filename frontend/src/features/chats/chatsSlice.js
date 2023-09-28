@@ -32,10 +32,10 @@ export const getChats = createAsyncThunk(
 //* GET NEW CHATS
 export const newChats = createAsyncThunk(
   'chats/newchats',
-  async (searchEmail, thunkAPI) => {
+  async (searchData, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
-      return await chatsService.newChats(searchEmail, token)
+      return await chatsService.newChats(searchData, token)
     } catch (error) {
       const message =
         (error.response &&

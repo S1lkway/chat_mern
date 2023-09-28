@@ -14,13 +14,13 @@ const getChats = async (token) => {
 }
 
 //* GET NEW CHATS
-const newChats = async (searchEmail, token) => {
+const newChats = async (searchData, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
-  const response = await axios.post(API_URL + 'newchats', searchEmail, config)
+  const response = await axios.post(API_URL + 'newchats', searchData, config)
   return response.data
 }
 
