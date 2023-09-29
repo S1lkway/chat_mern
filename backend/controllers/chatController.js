@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 const Chat = require('../models/chatModel')
+const Message = require('../models/messageModel')
 // console.log('User - ' + req.user.id)
 // console.log('Contact - ' + req.body.id)
 
@@ -106,6 +107,8 @@ const createChat = asyncHandler(async (req, res) => {
 const deleteChat = asyncHandler(async (req, res) => {
   const chatToDelete = await Chat.findById(req.params.id)
   if (chatToDelete) {
+    ///Delete all messages that connected to current chat
+    await Message.deleteMany({ chat: chatToDelete._id });
     ///Delete chat data from MongoDB
     await chatToDelete.deleteOne()
     res.status(200).json({ id: req.params.id })

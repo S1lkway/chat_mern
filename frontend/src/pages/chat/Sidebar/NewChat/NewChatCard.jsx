@@ -8,7 +8,7 @@ function NewChatCard(props) {
   const userData = props.userData
 
   const createNewChat = (id) => {
-    console.log('Create chat with user ' + id)
+    // console.log('Create chat with user ' + id)
     const chatData = { id: id }
     dispatch(createChat(chatData))
   }
