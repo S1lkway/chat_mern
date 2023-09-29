@@ -35,10 +35,23 @@ const createChat = async (chatData, token) => {
   return response.data
 }
 
+//* DELETE CHAT
+const deleteChat = async (chatId, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  const response = await axios.delete(API_URL + chatId, config)
+  return response.data
+}
+
+
 const chatsService = {
   getChats,
   newChats,
-  createChat
+  createChat,
+  deleteChat
 }
 
 export default chatsService

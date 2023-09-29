@@ -66,6 +66,27 @@ export const createChat = createAsyncThunk(
     }
   }
 )
+
+//* DELETE CHAT
+export const deleteChat = createAsyncThunk(
+  'chats/delete',
+  async (chatId, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token
+      return await chatsService.deleteChat(chatId, token)
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString()
+      return thunkAPI.rejectWithValue(message)
+    }
+  }
+)
+
+
 //*CHATS SLICE
 export const chatsSlice = createSlice({
   name: 'chats',
@@ -115,6 +136,22 @@ export const chatsSlice = createSlice({
         )
       })
       .addCase(createChat.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      /// deleteChat
+      .addCase(deleteChat.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(deleteChat.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.chats = state.chats.filter(
+          (chat) => chat._id !== action.payload
+        )
+      })
+      .addCase(deleteChat.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

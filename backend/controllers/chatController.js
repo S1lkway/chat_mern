@@ -111,7 +111,7 @@ const deleteChat = asyncHandler(async (req, res) => {
     await Message.deleteMany({ chat: chatToDelete._id });
     ///Delete chat data from MongoDB
     await chatToDelete.deleteOne()
-    res.status(200).json({ id: req.params.id })
+    res.status(200).json(req.params.id)
   } else {
     res.status(401)
     throw new Error('Chat is not found')
