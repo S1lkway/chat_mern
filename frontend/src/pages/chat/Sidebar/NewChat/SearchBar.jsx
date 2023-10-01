@@ -26,7 +26,7 @@ function SearchBar() {
     e.preventDefault()
 
     if (email.length <= 2) {
-      toast.error('Email needs to be more than 2 symbols')
+      toast.error('The search email must contain at least 2 characters')
     } else {
 
       dispatch(newChats(formData))
