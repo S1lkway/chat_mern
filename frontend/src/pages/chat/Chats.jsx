@@ -16,7 +16,7 @@ function Chats() {
   useEffect(() => {
     socket = io('http://localhost:3000')
     return () => {
-      socket.close()
+      socket?.close()
     }
   }, [])
 

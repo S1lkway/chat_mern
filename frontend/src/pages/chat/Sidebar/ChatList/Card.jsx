@@ -35,7 +35,7 @@ function Card(props) {
   const removeChat = () => {
     dispatch(deleteChat(chatId))
     const removeData = { chatId: chatId, userData: userData }
-    socket.emit("remove chat", removeData)
+    socket?.emit("remove chat", removeData)
     if (currentChat === chatId) {
       dispatch(resetMessages())
     }
