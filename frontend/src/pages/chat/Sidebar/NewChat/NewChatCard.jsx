@@ -40,7 +40,7 @@ function NewChatCard(props) {
         className="confirmationModal"
         overlayClassName="confirmationOverlay"
       >
-        <h3>Create a chat with {userData.name}?</h3>
+        <h3>Create chat with {userData.name}?</h3>
         <div className='modalButtons'>
           <button onClick={createNewChat} className='btn'>Yes</button>
           <button onClick={closeConfirmationModal} className='btn'>No</button>

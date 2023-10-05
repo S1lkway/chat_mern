@@ -5,14 +5,14 @@ import ChatList from "./ChatList/ChatList"
 import NewChat from "./NewChat/NewChat"
 //- Redux
 
-function SideBar() {
+function SideBar(props) {
   const [sideBarContent, setSideBarContent] = useState('chatList')
 
   return (
     <>
       <SideBarButtons sideBarContent={sideBarContent} setSideBarContent={setSideBarContent} />
       {(sideBarContent === 'chatList') ? (
-        <ChatList />
+        <ChatList socket={props.socket} />
       ) : (
         <NewChat />
       )}

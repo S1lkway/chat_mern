@@ -14,6 +14,7 @@ function Card(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const chatId = props.chatId
   const userData = props.userData
+  const socket = props.socket
 
   useEffect(() => {
     setCurrentChat(chat?._id)
@@ -33,6 +34,8 @@ function Card(props) {
 
   const removeChat = () => {
     dispatch(deleteChat(chatId))
+    const removeData = { chatId: chatId, userData: userData }
+    socket.emit("remove chat", removeData)
     if (currentChat === chatId) {
       dispatch(resetMessages())
     }
@@ -53,7 +56,7 @@ function Card(props) {
         className="confirmationModal"
         overlayClassName="confirmationOverlay"
       >
-        <h3>Delete a chat with {userData.name}?</h3>
+        <h3>Delete chat with {userData.name}?</h3>
         <div className='modalButtons'>
           <button onClick={removeChat} className='btn'>Yes</button>
           <button onClick={closeConfirmationModal} className='btn'>No</button>

@@ -70,6 +70,11 @@ io.on("connection", (socket) => {
     // console.log(`Got new message from ${websocketMessageData.user.name} to Chat: ${websocketMessageData.chat}`)
     socket.broadcast.to(websocketMessageData.chat).emit('websocket message', websocketMessageData);
   })
+  /// User removes chat and reset chats of every connected users
+  socket.on("remove chat", (removeData) => {
+    // console.log(`User ${removeData.userData.name} removed chat ${removeData.chatId}`)
+    socket.broadcast.to(removeData.chatId).emit('reset chats', removeData);
+  })
   /// Disconnect from socket io
   socket.on('disconnect', () => {
     // console.log('User disconnected from socket.io');

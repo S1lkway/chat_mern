@@ -22,7 +22,7 @@ function Chats() {
 
   return (
     <>
-      <SideBar />
+      <SideBar socket={socket} />
 
       {chat?._id ? (
         <Messages socket={socket} />
