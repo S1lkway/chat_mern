@@ -10,11 +10,11 @@ function NewChatCard(props) {
   const userData = props.userData
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  //*DELETE ARTICLE IN MODAL
-  const openCreateModal = () => {
+  //*CONFIRMATION IN MODAL
+  const openConfirmationModal = () => {
     setModalIsOpen(true);
   };
-  const closeCreateModal = () => {
+  const closeConfirmationModal = () => {
     setModalIsOpen(false);
   };
 
@@ -22,7 +22,7 @@ function NewChatCard(props) {
     // console.log('Create chat with user ' + id)
     const chatData = { id: userData._id }
     dispatch(createChat(chatData))
-    closeCreateModal();
+    closeConfirmationModal();
   }
   return (
     <div className="card" title="Open chat">
@@ -30,20 +30,20 @@ function NewChatCard(props) {
         <span className="card_name">{userData.name}</span>
         <span className="card_email"><i>{userData.email}</i></span>
       </div>
-      <div className="delete-button" title="Create chat" onClick={openCreateModal}>
+      <div className="delete-button" title="Create chat" onClick={openConfirmationModal}>
         <FaUserPlus />
       </div>
 
       <ReactModal
         isOpen={modalIsOpen}
-        onRequestClose={closeCreateModal}
+        onRequestClose={closeConfirmationModal}
         className="confirmationModal"
         overlayClassName="confirmationOverlay"
       >
-        <h3>Are you sure?</h3>
+        <h3>Create a chat with {userData.name}?</h3>
         <div className='modalButtons'>
           <button onClick={createNewChat} className='btn'>Yes</button>
-          <button onClick={closeCreateModal} className='btn'>No</button>
+          <button onClick={closeConfirmationModal} className='btn'>No</button>
         </div>
       </ReactModal>
     </div>
