@@ -354,6 +354,11 @@ ul {
   >p {
     color: #c0c0c0;
   }
+
+  >span {
+    color: #c0c0c0;
+    font-size: 18px;
+  }
 }
 
 
