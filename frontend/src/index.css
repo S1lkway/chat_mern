@@ -361,6 +361,42 @@ ul {
   }
 }
 
+/** REACTMODAL WINDOWS             */
+/** ****************************** */
+/** ****************************** */
+/*/// Modal confirmation */
+.confirmationModal {
+  position: fixed;
+  min-width: 15%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* border: 1px solid #ccc; */
+  background: #fff;
+  overflow: auto;
+  border-radius: 5px;
+  outline: none;
+  padding: 20px;
+  text-align: center;
+}
+
+.confirmationOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(209, 205, 205, 0.75);
+}
+
+/*/// Modal Buttons */
+.modalButtons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 15px;
+}
+
 
 
 
