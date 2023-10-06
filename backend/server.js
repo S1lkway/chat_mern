@@ -55,6 +55,11 @@ const io = require("socket.io")(server, {
 io.on("connection", (socket) => {
   /// When someone connected we will see it on console
   // console.log('A user connected to socket.io');
+  /// User joining to private chat
+  socket.on("join private", (chatData) => {
+    socket.join(chatData.userId);
+    console.log(`User ${chatData.userName} Joined Privat Chat: ` + chatData.userId);
+  });
   /// User joining a chat to get messages from other members of that chat live
   socket.on("join chat", (chatData) => {
     socket.join(chatData.chatId);
@@ -65,16 +70,25 @@ io.on("connection", (socket) => {
     socket.leave(chatData.chatId);
     // console.log(`${chatData.userName} Leaved Chat: ` + chatData.chatId);
   });
+
   /// Getting message from user in chat and send it to others members of this chat live
   socket.on("new message", (websocketMessageData) => {
     // console.log(`Got new message from ${websocketMessageData.user.name} to Chat: ${websocketMessageData.chat}`)
     socket.broadcast.to(websocketMessageData.chat).emit('websocket message', websocketMessageData);
   })
+
   /// User removes chat and reset chats of every connected users
-  socket.on("remove chat", (removeData) => {
-    // console.log(`User ${removeData.userData.name} removed chat ${removeData.chatId}`)
-    socket.broadcast.to(removeData.chatId).emit('reset chats', removeData);
+  socket.on("remove chat", (websocketData) => {
+    console.log(`User ${websocketData.userData.name} removed chat ${websocketData.chatId}`)
+    socket.broadcast.to(websocketData.chatId).emit('reset chats', websocketData);
   })
+
+  /// Creating chat and change a chatList of users
+  socket.on("create chat", (websocketMessageData) => {
+    // console.log(`Got new message from ${websocketMessageData.user.name} to Chat: ${websocketMessageData.chat}`)
+    // socket.broadcast.to(websocketMessageData.chat).emit('websocket message', websocketMessageData);
+  })
+
   /// Disconnect from socket io
   socket.on('disconnect', () => {
     // console.log('User disconnected from socket.io');

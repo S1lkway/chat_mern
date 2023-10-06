@@ -9,15 +9,17 @@ let socket;
 
 function Chats() {
 
-
+  const { user } = useSelector((state) => state.auth)
   const { chat } = useSelector((state) => state.messagesList)
 
   ///Socket.io connection
   useEffect(() => {
     socket = io('http://localhost:3000')
+    socket?.emit('join private', { userId: user._id, userName: user.name });
     return () => {
       socket?.close()
     }
+    // eslint-disable-next-line
   }, [])
 
   return (

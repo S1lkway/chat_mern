@@ -18,11 +18,11 @@ function ChatList(props) {
 
   /// Put message from other members of chatroom in redux when get it from websocket
   useEffect(() => {
-    socket?.on("reset chats", (removeData) => {
-      // console.log(`User ${removeData.userData.name}(${removeData.userData.email}) removed chat`)
+    socket?.on("reset chats", (websocketData) => {
+      console.log(`Chat with ${websocketData.userData.name} (${websocketData.userData.email}) was removed`)
       dispatch(getChats())
       dispatch(resetMessages())
-      toast.error(`User ${removeData.userData.email}) removed chat`)
+      toast.error(`User ${websocketData.userData.email}) removed chat`)
     })
     return () => {
       socket?.off('reset chats');
@@ -46,7 +46,7 @@ function ChatList(props) {
     <div className="chat_list">
       {chats?.length > 0 ? (
         chats?.map((chat) => (
-          <Card key={chat._id} chatId={chat._id} userData={chat.users[0]} socket={socket} />
+          <Card key={chat._id} chatId={chat._id} contactData={chat.users[0]} socket={socket} />
         ))
       ) : (
 
