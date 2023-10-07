@@ -35,8 +35,8 @@ function Card(props) {
 
   const removeChat = () => {
     dispatch(deleteChat(chatId))
-    const removeData = { chatId: chatId, contactData: contactData, userData: user }
-    socket?.emit("remove chat", removeData)
+    const webSocketData = { roomId: chatId, contactData: contactData, userData: user, type: 'removed' }
+    socket?.emit("reset chatlist", webSocketData)
     if (currentChat === chatId) {
       dispatch(resetMessages())
     }

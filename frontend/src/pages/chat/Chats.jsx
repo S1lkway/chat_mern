@@ -15,7 +15,7 @@ function Chats() {
   ///Socket.io connection
   useEffect(() => {
     socket = io('http://localhost:3000')
-    socket?.emit('join private', { userId: user._id, userName: user.name });
+    socket?.emit('join private', user);
     return () => {
       socket?.close()
     }
