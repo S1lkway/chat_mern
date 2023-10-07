@@ -7,18 +7,24 @@ const Message = require('../models/messageModel')
 //* route GET /api/messages
 //* access Private
 const getMessages = asyncHandler(async (req, res) => {
-  /// CONSTS
-  const chatData = await Chat.findById(req.params.id).populate({
-    path: 'users',
-    select: '_id name email',
-    match: { _id: { $ne: req.user.id } } // Исключение текущего пользователя
-  });
-  /// ACTIONS
-  const messages = await Message.find({ chat: chatData._id }).populate({
-    path: 'user',
-    select: '_id name email',
-  });
-  res.status(200).json({ chatData: chatData, chatMessages: messages })
+  try {
+    /// CONSTS
+    const chatData = await Chat.findById(req.params.id).populate({
+      path: 'users',
+      select: '_id name email',
+      match: { _id: { $ne: req.user.id } } // Исключение текущего пользователя
+    });
+    /// ACTIONS
+    const messages = await Message.find({ chat: chatData._id }).populate({
+      path: 'user',
+      select: '_id name email',
+    });
+    res.status(200).json({ chatData: chatData, chatMessages: messages })
+  } catch (error) {
+    res.status(401)
+    throw new Error(error)
+  }
+
 })
 
 //* desc ADD message
