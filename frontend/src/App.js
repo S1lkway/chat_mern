@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     if (user != null) {
       // Создаем подключение к WebSocket
-      const newSocket = io('http://localhost:3000');
+      const newSocket = io('http://localhost:5000');
       newSocket?.emit('join private', user);
 
       // Устанавливаем сокет в состояние

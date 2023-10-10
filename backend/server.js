@@ -34,6 +34,19 @@ app.use('/api/chats', require('./routes/chatRoutes'))
 // routes to get, add and delete messages
 app.use('/api/messages', require('./routes/messageRoutes'))
 
+// Serve frontend
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+  app.get('*', (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, '../', 'frontend', 'build', 'index.html')
+    )
+  )
+} else {
+  app.get('/', (req, res) => res.send('Please set to production'))
+}
+
 /* Provides a basic error handling mechanism in Express that sends a JSON response with an error message and, optionally, the stack trace */
 app.use(errorHandler)
 
@@ -46,7 +59,7 @@ const io = require("socket.io")(server, {
   //If connected user doesn't do anything 60 seconds he is disconnect
   pingTimeout: 900000,
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:5000",
     // credentials: true,
   },
 });
@@ -54,11 +67,11 @@ const io = require("socket.io")(server, {
 //* It's sockets(methods) of websocket connection
 io.on("connection", (socket) => {
   /// When someone connected we will see it on console
-  console.log('A user connected to socket.io');
+  // console.log('A user connected to socket.io');
   /// User joining to private chat
   socket.on("join private", (chatData) => {
     socket.join(chatData._id);
-    console.log(`User ${chatData.name} Joined Privat Chat: ` + chatData._id);
+    // console.log(`User ${chatData.name} Joined Privat Chat: ` + chatData._id);
   });
   /// User joining a chat to get messages from other members of that chat live
   socket.on("join chat", (chatData) => {
@@ -79,13 +92,13 @@ io.on("connection", (socket) => {
 
   /// User removes chat and reset chats of every connected users
   socket.on("reset chatlist", (websocketData) => {
-    console.log(`User ${websocketData.userData.email} ${websocketData.type} chat`)
+    // console.log(`User ${websocketData.userData.email} ${websocketData.type} chat`)
     socket.broadcast.to(websocketData.contactData._id).emit('reset chatlist', websocketData);
   })
 
   /// Disconnect from socket io
   socket.on('disconnect', () => {
-    console.log('User disconnected from socket.io');
+    // console.log('User disconnected from socket.io');
   });
 });
 

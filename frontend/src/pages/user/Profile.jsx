@@ -44,7 +44,7 @@ function Profile() {
     if (password !== password2) {
       toast.error('Password do not match')
     } else {
-      if (name.length < 5 || email.length < 5 || password < 5) {
+      if (name.length < 5 || email.length < 5 || password.length < 5) {
         toast.error('Fields must contain at least 5 characters')
       } else {
         const userData = {

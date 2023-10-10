@@ -42,17 +42,23 @@ function Register() {
   const onSubmit = (e) => {
     e.preventDefault()
 
+
+
     if (password !== password2) {
       toast.error('Password do not match')
-    } else {
-      const userData = {
-        name,
-        email,
-        password,
-      }
 
-      // We send data from form to authSlice to register function and there to server by authService
-      dispatch(register(userData))
+    } else {
+      if (name.length < 5 || email.length < 5 || password.length < 5) {
+        toast.error('Fields must contain at least 5 characters')
+      } else {
+        const userData = {
+          name,
+          email,
+          password,
+        }
+        // We send data from form to authSlice to register function and there to server by authService
+        dispatch(register(userData))
+      }
     }
   }
   return (
