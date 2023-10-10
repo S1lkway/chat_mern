@@ -17,7 +17,6 @@ function Card(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const chatId = props.chatId
   const contactData = props.contactData
-  // const socket = props.socket
 
   useEffect(() => {
     setCurrentChat(chat?._id)
@@ -37,7 +36,7 @@ function Card(props) {
 
   const removeChat = () => {
     dispatch(deleteChat(chatId))
-    const webSocketData = { roomId: chatId, contactData: contactData, userData: user, type: 'removed' }
+    const webSocketData = { chatId: chatId, contactData: contactData, userData: user, type: 'removed' }
     socket?.emit("reset chatlist", webSocketData)
     if (currentChat === chatId) {
       dispatch(resetMessages())

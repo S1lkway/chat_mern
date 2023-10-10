@@ -1,13 +1,16 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, useContext } from "react";
+import { useDispatch, useSelector } from 'react-redux'
 import { FaUserPlus } from "react-icons/fa";
 import ReactModal from 'react-modal';
+import SocketContext from '../../../../utils/SocketContext'
 // - Redux
 import { createChat } from "../../../../features/chats/chatsSlice";
 
 function NewChatCard(props) {
+  const socket = useContext(SocketContext);
   const dispatch = useDispatch()
   const userData = props.userData
+  const { user } = useSelector((state) => state.auth)
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   //*CONFIRMATION IN MODAL
@@ -19,9 +22,10 @@ function NewChatCard(props) {
   };
 
   const createNewChat = () => {
-    // console.log('Create chat with user ' + id)
     const chatData = { id: userData._id }
     dispatch(createChat(chatData))
+    const webSocketData = { chatId: null, contactData: userData, userData: user, type: 'created' }
+    socket?.emit("reset chatlist", webSocketData)
     closeConfirmationModal();
   }
   return (

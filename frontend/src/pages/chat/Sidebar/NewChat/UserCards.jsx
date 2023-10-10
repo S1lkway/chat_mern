@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import NewChatCard from './NewChatCard'
 
-function UserCard(props) {
+function UserCard() {
   const { newChats } = useSelector((state) => state.chatList)
 
   return (

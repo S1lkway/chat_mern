@@ -30,7 +30,6 @@ function SearchBar() {
     } else {
 
       dispatch(newChats(formData))
-      // setFormData({ email: '' })
     }
   }
   return (

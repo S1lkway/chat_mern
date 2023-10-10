@@ -9,22 +9,23 @@ import Card from "./Card"
 import { getChats, resetChats } from '../../../../features/chats/chatsSlice'
 import { resetMessages } from "../../../../features/messages/messagesSlice"
 
-function ChatList(props) {
+function ChatList() {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  // const socket = props.socket
 
   const { user } = useSelector((state) => state.auth)
   const { chats, isLoading, isError, message } = useSelector((state) => state.chatList)
+  const { chat } = useSelector((state) => state.messagesList)
 
   /// Put message from other members of chatroom in redux when get it from websocket
   useEffect(() => {
     socket?.on("reset chatlist", (websocketData) => {
-      // console.log(`Chat with ${websocketData.userData.name} (${websocketData.userData.email}) was ${websocketData.type}`)
       dispatch(getChats())
-      dispatch(resetMessages())
-      toast.error(`User ${websocketData.userData.email}) ${websocketData.type} chat`)
+      if (chat?._id === websocketData.chatId) {
+        dispatch(resetMessages())
+      }
+      toast.info(`User ${websocketData.userData.email}) ${websocketData.type} chat`)
     })
     return () => {
       socket?.off('reset chatlist');

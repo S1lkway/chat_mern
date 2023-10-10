@@ -79,8 +79,8 @@ io.on("connection", (socket) => {
 
   /// User removes chat and reset chats of every connected users
   socket.on("reset chatlist", (websocketData) => {
-    console.log(`User ${websocketData.userData.name} ${websocketData.type} chat ${websocketData.roomId}`)
-    socket.broadcast.to(websocketData.roomId).emit('reset chatlist', websocketData);
+    console.log(`User ${websocketData.userData.email} ${websocketData.type} chat`)
+    socket.broadcast.to(websocketData.contactData._id).emit('reset chatlist', websocketData);
   })
 
   /// Disconnect from socket io
