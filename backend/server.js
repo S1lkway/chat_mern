@@ -57,8 +57,8 @@ io.on("connection", (socket) => {
   console.log('A user connected to socket.io');
   /// User joining to private chat
   socket.on("join private", (chatData) => {
-    socket.join(chatData.email);
-    console.log(`User ${chatData.name} Joined Privat Chat: ` + chatData.email);
+    socket.join(chatData._id);
+    console.log(`User ${chatData.name} Joined Privat Chat: ` + chatData._id);
   });
   /// User joining a chat to get messages from other members of that chat live
   socket.on("join chat", (chatData) => {
