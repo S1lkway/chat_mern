@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react"
+import { useEffect, useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
@@ -16,24 +16,21 @@ function ChatList() {
 
   const { user } = useSelector((state) => state.auth)
   const { chats, isLoading, isError, message } = useSelector((state) => state.chatList)
-  const { chat, isLoadingMessages } = useSelector((state) => state.messagesList)
+  const { chat } = useSelector((state) => state.messagesList)
+  const [websocketReset, setWebsocketReset] = useState(false)
 
   /// Put message from other members of chatroom in redux when get it from websocket
   useEffect(() => {
-    socket?.on("reset chatlist", (websocketData) => {
+    socket.on("reset chatlist", (websocketData) => {
 
       if (chat?._id === websocketData.chatId) {
-        console.log('reset Messages')
         dispatch(resetMessages())
       }
-      if (!isLoadingMessages) {
-        console.log('Get Chats')
-        dispatch(getChats())
-      }
+      setWebsocketReset(true)
       toast.info(`User ${websocketData.userData.email}) ${websocketData.type} chat`)
     })
     return () => {
-      socket?.off('reset chatlist');
+      socket.off('reset chatlist');
     };
   })
 
@@ -45,10 +42,11 @@ function ChatList() {
       navigate('/login')
     }
     dispatch(getChats())
+    setWebsocketReset(false)
     return () => {
       dispatch(resetChats())
     }
-  }, [user, navigate, isError, message, dispatch])
+  }, [user, navigate, isError, message, dispatch, websocketReset])
   return (
 
     <div className="chat_list">
