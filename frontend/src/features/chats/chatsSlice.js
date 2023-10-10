@@ -12,7 +12,7 @@ const initialState = {
 
 //* GET MY CHATS
 export const getChats = createAsyncThunk(
-  'chats',
+  'chats/getchats',
   async (_, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token
