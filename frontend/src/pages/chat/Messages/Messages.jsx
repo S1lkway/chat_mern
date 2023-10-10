@@ -13,7 +13,7 @@ function Messages(props) {
   // const socket = props.socket
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
-  const { messages, chat, isLoading } = useSelector((state) => state.messagesList)
+  const { messages, chat, isLoadingMessages } = useSelector((state) => state.messagesList)
   const messagesContainerRef = useRef(null);
 
   /// Scroll container dows when messages change
@@ -24,7 +24,7 @@ function Messages(props) {
   }, [messages]);
   /// Join and leaving chatroom when chat is changes
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoadingMessages) {
       socket.emit('join chat', { userName: user.name, chatId: chat._id });
       return () => {
         socket.emit('leave chat', { userName: user.name, chatId: chat._id })

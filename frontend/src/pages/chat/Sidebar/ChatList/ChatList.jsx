@@ -16,14 +16,19 @@ function ChatList() {
 
   const { user } = useSelector((state) => state.auth)
   const { chats, isLoading, isError, message } = useSelector((state) => state.chatList)
-  const { chat } = useSelector((state) => state.messagesList)
+  const { chat, isLoadingMessages } = useSelector((state) => state.messagesList)
 
   /// Put message from other members of chatroom in redux when get it from websocket
   useEffect(() => {
     socket?.on("reset chatlist", (websocketData) => {
-      dispatch(getChats())
+
       if (chat?._id === websocketData.chatId) {
+        console.log('reset Messages')
         dispatch(resetMessages())
+      }
+      if (!isLoadingMessages) {
+        console.log('Get Chats')
+        dispatch(getChats())
       }
       toast.info(`User ${websocketData.userData.email}) ${websocketData.type} chat`)
     })

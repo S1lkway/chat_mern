@@ -7,7 +7,7 @@ const initialState = {
   messages: [],
   isError: false,
   isSuccess: false,
-  isLoading: false,
+  isLoadingMessages: false,
   message: '',
 }
 
@@ -73,45 +73,45 @@ export const messagesSlice = createSlice({
     builder
       /// Get Chats
       .addCase(getMessages.pending, (state) => {
-        state.isLoading = true
+        state.isLoadingMessages = true
       })
       .addCase(getMessages.fulfilled, (state, action) => {
-        state.isLoading = false
+        state.isLoadingMessages = false
         state.isSuccess = true
         const { chatData, chatMessages } = action.payload;
         state.chat = chatData
         state.messages = chatMessages
       })
       .addCase(getMessages.rejected, (state, action) => {
-        state.isLoading = false
+        state.isLoadingMessages = false
         state.isError = true
         state.message = action.payload
       })
       /// Add Message
       .addCase(addMessage.pending, (state) => {
-        state.isLoading = true
+        state.isLoadingMessages = true
       })
       .addCase(addMessage.fulfilled, (state, action) => {
-        state.isLoading = false
+        state.isLoadingMessages = false
         state.isSuccess = true
         state.messages.push(action.payload)
       })
       .addCase(addMessage.rejected, (state, action) => {
-        state.isLoading = false
+        state.isLoadingMessages = false
         state.isError = true
         state.message = action.payload
       })
       /// Websocket Message
       .addCase(websocketMessage.pending, (state) => {
-        state.isLoading = true
+        state.isLoadingMessages = true
       })
       .addCase(websocketMessage.fulfilled, (state, action) => {
-        state.isLoading = false
+        state.isLoadingMessages = false
         state.isSuccess = true
         state.messages.push(action.payload)
       })
       .addCase(websocketMessage.rejected, (state, action) => {
-        state.isLoading = false
+        state.isLoadingMessages = false
         state.isError = true
         state.message = action.payload
       })

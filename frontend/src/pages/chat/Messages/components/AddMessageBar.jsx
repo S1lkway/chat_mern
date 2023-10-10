@@ -12,7 +12,7 @@ function AddMessageBar(props) {
   const socket = useContext(SocketContext);
   const dispatch = useDispatch()
   // const socket = props.socket
-  const { chat, messages, isLoading } = useSelector((state) => state.messagesList)
+  const { chat, messages, isLoadingMessages } = useSelector((state) => state.messagesList)
   const [formData, setFormData] = useState({
     text: '',
   })
@@ -22,14 +22,14 @@ function AddMessageBar(props) {
 
   /// Send a message to websocket connection
   useEffect(() => {
-    if (sendMessage && !isLoading) {
+    if (sendMessage && !isLoadingMessages) {
       const lastMessage = messages[messages.length - 1]
       // console.log(lastMessage)
       socket.emit("new message", lastMessage)
       setSendMessage(false)
     }
     // eslint-disable-next-line
-  }, [sendMessage, isLoading])
+  }, [sendMessage, isLoadingMessages])
 
   /// Changing state before sending message
   const onChange = (e) => {
