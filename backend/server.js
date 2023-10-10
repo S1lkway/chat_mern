@@ -59,7 +59,7 @@ const io = require("socket.io")(server, {
   //If connected user doesn't do anything 60 seconds he is disconnect
   pingTimeout: 900000,
   cors: {
-    origin: "http://localhost:5000",
+    origin: "https://chat-mern-eb01.onrender.com",
     // credentials: true,
   },
 });
