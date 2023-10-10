@@ -43,8 +43,10 @@ function Card(props) {
     }
     closeConfirmationModal();
   }
+
+  const cardStyle = currentChat === chatId ? 'card current_card ' : 'card'
   return (
-    <div className="card" title="Open chat">
+    <div className={cardStyle} title="Open chat">
       <div className="user-info" onClick={() => openChat(chatId)}>
         <span className="card_name">{contactData.name}</span>
         <span className="card_email"><i>{contactData.email}</i></span>
