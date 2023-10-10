@@ -12,7 +12,7 @@ function SideBar(props) {
     <>
       <SideBarButtons sideBarContent={sideBarContent} setSideBarContent={setSideBarContent} />
       {(sideBarContent === 'chatList') ? (
-        <ChatList socket={props.socket} />
+        <ChatList />
       ) : (
         <NewChat />
       )}

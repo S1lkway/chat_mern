@@ -1,5 +1,6 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useContext } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import SocketContext from '../../../utils/SocketContext'
 // - Components
 import AddMessageBar from './components/AddMessageBar'
 import Message from './components/Message'
@@ -8,7 +9,8 @@ import { websocketMessage } from '../../../features/messages/messagesSlice'
 
 function Messages(props) {
   /// Consts
-  const socket = props.socket
+  const socket = useContext(SocketContext);
+  // const socket = props.socket
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
   const { messages, chat, isLoading } = useSelector((state) => state.messagesList)
@@ -57,7 +59,7 @@ function Messages(props) {
           </div>
         )}
       </div>
-      <AddMessageBar socket={socket} />
+      <AddMessageBar />
     </>
   )
 }

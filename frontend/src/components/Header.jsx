@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaDeleteLeft } from "react-icons/fa6";
+import SocketContext from '../utils/SocketContext';
 // - Redux
 import { logout, reset } from '../features/auth/authSlice'
 import { resetChats } from '../features/chats/chatsSlice'
@@ -8,6 +10,7 @@ import { resetMessages } from '../features/messages/messagesSlice'
 
 
 function Header() {
+  const socket = useContext(SocketContext);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
@@ -18,6 +21,8 @@ function Header() {
   }
 
   const onLogout = () => {
+    socket.emit("leave chat", user.email)
+    socket.close();
     dispatch(logout())
     dispatch(reset())
     dispatch(resetChats())

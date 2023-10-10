@@ -1,15 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { BsFillSendFill } from "react-icons/bs";
+import SocketContext from "../../../../utils/SocketContext";
 // - Redux
 import { addMessage } from '../../../../features/messages/messagesSlice'
 
 function AddMessageBar(props) {
 
   /// CONSTANTS
+  const socket = useContext(SocketContext);
   const dispatch = useDispatch()
-  const socket = props.socket
+  // const socket = props.socket
   const { chat, messages, isLoading } = useSelector((state) => state.messagesList)
   const [formData, setFormData] = useState({
     text: '',

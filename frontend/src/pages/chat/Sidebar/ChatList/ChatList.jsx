@@ -1,7 +1,8 @@
-import { useEffect } from "react"
+import { useEffect, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import SocketContext from "../../../../utils/SocketContext"
 //- Components
 import Card from "./Card"
 //- Redux
@@ -9,9 +10,10 @@ import { getChats, resetChats } from '../../../../features/chats/chatsSlice'
 import { resetMessages } from "../../../../features/messages/messagesSlice"
 
 function ChatList(props) {
+  const socket = useContext(SocketContext);
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const socket = props.socket
+  // const socket = props.socket
 
   const { user } = useSelector((state) => state.auth)
   const { chats, isLoading, isError, message } = useSelector((state) => state.chatList)
@@ -46,7 +48,7 @@ function ChatList(props) {
     <div className="chat_list">
       {chats?.length > 0 ? (
         chats?.map((chat) => (
-          <Card key={chat._id} chatId={chat._id} contactData={chat.users[0]} socket={socket} />
+          <Card key={chat._id} chatId={chat._id} contactData={chat.users[0]} />
         ))
       ) : (
 

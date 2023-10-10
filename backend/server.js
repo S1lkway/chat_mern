@@ -44,7 +44,7 @@ const server = app.listen(port, () => console.log(`Server started on port ${port
 //* We are making a new WebSocket server
 const io = require("socket.io")(server, {
   //If connected user doesn't do anything 60 seconds he is disconnect
-  pingTimeout: 300000,
+  pingTimeout: 900000,
   cors: {
     origin: "http://localhost:3000",
     // credentials: true,
@@ -54,7 +54,7 @@ const io = require("socket.io")(server, {
 //* It's sockets(methods) of websocket connection
 io.on("connection", (socket) => {
   /// When someone connected we will see it on console
-  // console.log('A user connected to socket.io');
+  console.log('A user connected to socket.io');
   /// User joining to private chat
   socket.on("join private", (chatData) => {
     socket.join(chatData.email);
@@ -85,7 +85,7 @@ io.on("connection", (socket) => {
 
   /// Disconnect from socket io
   socket.on('disconnect', () => {
-    // console.log('User disconnected from socket.io');
+    console.log('User disconnected from socket.io');
   });
 });
 

@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { FaDeleteLeft } from "react-icons/fa6";
 import ReactModal from 'react-modal';
+import SocketContext from '../../../../utils/SocketContext';
 // - Redux
 import { getMessages, resetMessages } from '../../../../features/messages/messagesSlice'
 import { deleteChat } from '../../../../features/chats/chatsSlice';
 
 
 function Card(props) {
+  const socket = useContext(SocketContext);
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.auth)
   const { chat } = useSelector((state) => state.messagesList)
@@ -15,7 +17,7 @@ function Card(props) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const chatId = props.chatId
   const contactData = props.contactData
-  const socket = props.socket
+  // const socket = props.socket
 
   useEffect(() => {
     setCurrentChat(chat?._id)
